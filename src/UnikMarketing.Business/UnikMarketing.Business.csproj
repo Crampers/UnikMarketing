@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UnikMarketing.Data.EntityFramework\UnikMarketing.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\UnikMarketing.Domain\UnikMarketing.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
