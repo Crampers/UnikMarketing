@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mbs\\source\\repos\\UnikMarketing\\UnikMarketing.Domain\\UnikMarketing.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\mbs\\source\\repos\\UnikMarketing\\src\\UnikMarketing.Domain\\UnikMarketing.Domain.csproj",
       "projectName": "UnikMarketing.Domain",
-      "projectPath": "C:\\Users\\mbs\\source\\repos\\UnikMarketing\\UnikMarketing.Domain\\UnikMarketing.Domain.csproj",
+      "projectPath": "C:\\Users\\mbs\\source\\repos\\UnikMarketing\\src\\UnikMarketing.Domain\\UnikMarketing.Domain.csproj",
       "packagesPath": "C:\\Users\\mbs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mbs\\source\\repos\\UnikMarketing\\UnikMarketing.Domain\\obj\\",
+      "outputPath": "C:\\Users\\mbs\\source\\repos\\UnikMarketing\\src\\UnikMarketing.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

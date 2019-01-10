@@ -19,11 +19,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\UnikMarketing.Business\UnikMarketing.Business.csproj" />
-    <ProjectReference Include="..\UnikMarketing.Data.EntityFramework\UnikMarketing.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\UnikMarketing.Data.MongoDb\UnikMarketing.Data.MongoDb.csproj" />
     <ProjectReference Include="..\UnikMarketing.Domain\UnikMarketing.Domain.csproj" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnikMarketing.Domain", "Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnikMarketing.Business", "UnikMarketing.Business\UnikMarketing.Business.csproj", "{69E3DB6E-9BEF-4CE9-821A-59248F53F2C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnikMarketing.Data.EntityFramework", "UnikMarketing.Data.EntityFramework\UnikMarketing.Data.EntityFramework.csproj", "{EBB3E176-98FE-4B87-8B7D-3E85FE86D01A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnikMarketing.Data.MongoDb", "UnikMarketing.Data.MongoDb\UnikMarketing.Data.MongoDb.csproj", "{9FE59A59-08E4-4BA8-9E68-E56B2B43DE82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{69E3DB6E-9BEF-4CE9-821A-59248F53F2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69E3DB6E-9BEF-4CE9-821A-59248F53F2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69E3DB6E-9BEF-4CE9-821A-59248F53F2C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBB3E176-98FE-4B87-8B7D-3E85FE86D01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBB3E176-98FE-4B87-8B7D-3E85FE86D01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBB3E176-98FE-4B87-8B7D-3E85FE86D01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBB3E176-98FE-4B87-8B7D-3E85FE86D01A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE59A59-08E4-4BA8-9E68-E56B2B43DE82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE59A59-08E4-4BA8-9E68-E56B2B43DE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE59A59-08E4-4BA8-9E68-E56B2B43DE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE59A59-08E4-4BA8-9E68-E56B2B43DE82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

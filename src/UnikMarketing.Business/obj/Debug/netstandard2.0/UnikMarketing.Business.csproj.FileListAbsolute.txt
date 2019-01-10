@@ -12,3 +12,15 @@ C:\Users\mbs\source\repos\UnikMarketing\UnikMarketing.Business\obj\Debug\netstan
 C:\Users\mbs\source\repos\UnikMarketing\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.pdb
 C:\Users\mbs\source\repos\UnikMarketing\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Data.EntityFramework.dll
 C:\Users\mbs\source\repos\UnikMarketing\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Data.EntityFramework.pdb
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.csprojAssemblyReference.cache
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.csproj.CoreCompileInputs.cache
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.AssemblyInfoInputs.cache
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.AssemblyInfo.cs
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.dll
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.pdb
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Business.deps.json
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Business.dll
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Business.pdb
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Domain.dll
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\bin\Debug\netstandard2.0\UnikMarketing.Domain.pdb
+C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Business\obj\Debug\netstandard2.0\UnikMarketing.Business.csproj.CopyComplete
