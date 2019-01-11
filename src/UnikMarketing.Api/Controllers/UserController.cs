@@ -4,21 +4,21 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Serilog;
 using UnikMarketing.Api.Models;
-using UnikMarketing.Business;
 using UnikMarketing.Domain;
+using UnikMarketing.Domain.Repositories;
 
 namespace UnikMarketing.Api.Controllers
 {
     [Route("users")]
     public class UserController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
-        public UserController(IUserService userService, IMapper mapper, ILogger logger)
+        public UserController(IUserRepository userRepository, IMapper mapper, ILogger logger)
         {
-            _userService = userService;
+            _userRepository = userRepository;
             _mapper = mapper;
             _logger = logger;
         }
@@ -28,7 +28,7 @@ namespace UnikMarketing.Api.Controllers
         public async Task<ActionResult<ICollection<UserDto>>> GetUsers()
         {
             //_logger.Information("Get Me!");
-            var users = await _userService.GetAll();
+            var users = await _userRepository.GetAll();
             var usersDtos = _mapper.Map<ICollection<UserDto>>(users);
 
             return Ok(usersDtos);
@@ -38,7 +38,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(int id)
         {
-            var user = await _userService.Get(id);
+            var user = await _userRepository.Get(id);
 
             if (user == null)
             {
@@ -54,7 +54,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}/requests")]
         public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(int id)
         {
-            var user = await _userService.Get(id);
+            var user = await _userRepository.Get(id);
 
             if (user == null)
             {
@@ -70,7 +70,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}/criteria")]
         public async Task<ActionResult<Criteria>> GetUserCriteria(int id)
         {
-            var user = await _userService.Get(id);
+            var user = await _userRepository.Get(id);
 
             if (user == null)
             {
@@ -87,33 +87,35 @@ namespace UnikMarketing.Api.Controllers
         public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            var createdUserDto = _mapper.Map<UserDto>(await _userService.Create(user));
+            var createdUserDto = _mapper.Map<UserDto>(await _userRepository.Create(user));
 
-            return CreatedAtAction("GetUser", new { Id = createdUserDto.Id }, createdUserDto);
+            return CreatedAtAction("GetUser", new {createdUserDto.Id }, createdUserDto);
         }
 
+        /*TODO: Solve Request issue
         //POST /users/{id}/requests (Creates a user's requests)
-        [HttpPost("{id}/requests")]
-        public async Task<ActionResult<User>> CreateUserRequest(int id, [FromBody] RequestDto requestDto)
-        {
-            var user = await _userService.Get(id);
+        //[HttpPost("{id}/requests")]
+        //public async Task<ActionResult<User>> CreateUserRequest(int id, [FromBody] RequestDto requestDto)
+        //{
+        //    var user = await _userRepository.Get(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var request = _mapper.Map<Request>(requestDto);
-            var createdRequest = await _userService.AddRequest(user, request);
+        //    var request = _mapper.Map<Request>(requestDto);
+        //    var createdRequest = await _userRepository.AddRequest(user, request);
 
-            return CreatedAtAction("GetRequest", "Request", new { id = createdRequest.Id }, createdRequest);
-        }
+        //    return CreatedAtAction("GetRequest", "Request", new { id = createdRequest.Id }, createdRequest);
+        //}
+        */
 
         //PUT /users/{id} (Updates an user ex- new email)
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(int id, [FromBody] UserDto userDto)
         {
-            var user = await _userService.Get(id);
+            var user = await _userRepository.Get(id);
 
             if (user == null)
             {
@@ -126,33 +128,35 @@ namespace UnikMarketing.Api.Controllers
             }
 
             var updatedUser = _mapper.Map<User>(userDto);
-            var updatedUserDto = _mapper.Map<UserDto>(await _userService.Update(updatedUser));
+            var updatedUserDto = _mapper.Map<UserDto>(await _userRepository.Update(updatedUser));
 
             return Ok(updatedUserDto);
         }
 
+        //TODO: Fix adding of Criteria
         //PUT /users/{id}/criteria (Updates a user's criteria))
-        [HttpPut("{id}/criteria")]
-        public async Task<ActionResult<User>> UpdateUserCriteria(int id, CriteriaDto criteriaDto)
-        {
-            var user = await _userService.Get(id);
+        //[HttpPut("{id}/criteria")]
+        //public async Task<ActionResult<User>> UpdateUserCriteria(int id, CriteriaDto criteriaDto)
+        //{
+        //    var user = await _userRepository.Get(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var criteria = _mapper.Map<Criteria>(criteriaDto);
-            var updatedCriteria = await _userService.UpdateCriteria(user, criteria);
+        //    var criteria = _mapper.Map<Criteria>(criteriaDto);
+        //    var updatedCriteria = await _userRepository.UpdateCriteria(user, criteria);
 
-            return Ok(updatedCriteria);
-        }
+        //    return Ok(updatedCriteria);
+        //}
 
         //DELETE /users/{id} (Self explanatory)
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
-            var user = await _userService.Get(id);
+            var user = await _userRepository.Get(id);
 
             if (user == null)
             {
@@ -164,7 +168,7 @@ namespace UnikMarketing.Api.Controllers
                 return BadRequest();
             }
 
-            await _userService.Delete(id);
+            await _userRepository.Delete(id);
 
             return NoContent();
         }
