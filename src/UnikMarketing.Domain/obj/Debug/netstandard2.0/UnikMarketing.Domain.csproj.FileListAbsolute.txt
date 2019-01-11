@@ -16,3 +16,12 @@ C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netst
 C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.AssemblyInfo.cs
 C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.dll
 C:\Users\mbs\source\repos\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.pdb
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\bin\Debug\netstandard2.0\UnikMarketing.Domain.deps.json
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\bin\Debug\netstandard2.0\UnikMarketing.Domain.dll
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\bin\Debug\netstandard2.0\UnikMarketing.Domain.pdb
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.csprojAssemblyReference.cache
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.csproj.CoreCompileInputs.cache
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.AssemblyInfoInputs.cache
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.AssemblyInfo.cs
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.dll
+C:\Projekter\UnikMarketing\src\UnikMarketing.Domain\obj\Debug\netstandard2.0\UnikMarketing.Domain.pdb
