@@ -1,0 +1,4 @@
+Ef Core er en bitch og mapper db som en fucking gøgler (Se udklip "efcore.png")
+
+SQL server er for tung til vores behov.
+Slipper for konfigurationen for vores forretningsbehov ifb.m. EF.

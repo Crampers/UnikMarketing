@@ -31,9 +31,14 @@ namespace UnikMarketing.Api
             services.AddTransient<IRequestService, RequestService>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("UnikMarketing"));
-            services.AddSingleton<ILogger>(provider => new LoggerConfiguration()
-                .ReadFrom.Configuration(_configuration)
-                .CreateLogger());
+            services.AddSingleton<ILogger>(provider =>
+            {
+                var logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(_configuration)
+                    .CreateLogger();
+                //logger.Information("Hehee");
+                return logger;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

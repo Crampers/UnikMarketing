@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Serilog;
 using UnikMarketing.Api.Models;
 using UnikMarketing.Business;
 using UnikMarketing.Domain;
@@ -13,17 +14,20 @@ namespace UnikMarketing.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper, ILogger logger)
         {
             _userService = userService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         //GET /users (Gets all users)
         [HttpGet]
         public async Task<ActionResult<ICollection<UserDto>>> GetUsers()
         {
+            //_logger.Information("Get Me!");
             var users = await _userService.GetAll();
             var usersDtos = _mapper.Map<ICollection<UserDto>>(users);
 
