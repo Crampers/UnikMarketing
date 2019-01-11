@@ -39,7 +39,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
             var collection = _mongoDatabase.GetCollection<User>(CollectionName);
             var cursor = await collection.FindAsync(Builders<User>.Filter.Eq(nameof(User.Id), id));
 
-            return await cursor.FirstAsync();
+            return await cursor.FirstOrDefaultAsync();
         }
 
         public async Task<User> Update(User user)

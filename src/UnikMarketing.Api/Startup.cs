@@ -38,6 +38,7 @@ namespace UnikMarketing.Api
             {
                 var logger = new LoggerConfiguration()
                     .ReadFrom.Configuration(_configuration)
+                    .Enrich.WithProperty("GET request", _configuration)
                     .CreateLogger();
                 return logger;
             });
