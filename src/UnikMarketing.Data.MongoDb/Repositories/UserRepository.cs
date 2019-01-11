@@ -10,7 +10,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private const string CollectionName = "Users";
+        private const string CollectionName = "users";
         private readonly IMongoDatabase _mongoDatabase;
 
         public UserRepository(IMongoDatabase mongoDatabase)

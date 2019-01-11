@@ -1,0 +1,11 @@
+[  
+    {  
+        "_id":0,
+        "Email":"ssstenz@haha.com",
+        "Name":"Mathias",
+        "Password":"supersafe",
+        "Address":"Someaddress 2",
+        "ZipCode":"7100",
+        "Criteria":null
+    }
+]
