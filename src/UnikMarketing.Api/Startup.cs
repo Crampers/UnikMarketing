@@ -32,6 +32,7 @@ namespace UnikMarketing.Api
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRequestService, RequestService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRequestRepository, RequestRepository>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
             services.AddSingleton<ILogger>(provider =>
