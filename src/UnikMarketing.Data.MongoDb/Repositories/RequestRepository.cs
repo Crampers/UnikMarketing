@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using UnikMarketing.Data.MongoDb.Documents;
 using UnikMarketing.Domain;
 using UnikMarketing.Domain.Repositories;
 
@@ -11,44 +13,51 @@ namespace UnikMarketing.Data.MongoDb.Repositories
     {
         private const string CollectionName = "requests";
         private readonly IMongoDatabase _database;
+        private readonly IMapper _mapper;
 
-        public RequestRepository(IMongoDatabase database)
+        public RequestRepository(IMongoDatabase database, IMapper mapper)
         {
             _database = database;
+            _mapper = mapper;
         }
 
         public async Task<Request> Create(Request request)
         {
-            var collection = _database.GetCollection<Request>(CollectionName);
-            await collection.InsertOneAsync(request);
+            var document = _mapper.Map<RequestDocument>(request);
+            var collection = _database.GetCollection<RequestDocument>(CollectionName);
 
-            return request;
+            await collection.InsertOneAsync(document);
+
+            return _mapper.Map<Request>(document);
         }
 
         public async Task<ICollection<Request>> GetAll()
         {
-            var collection = _database.GetCollection<Request>(CollectionName);
+            var collection = _database.GetCollection<RequestDocument>(CollectionName);
             var cursor = await collection.FindAsync(new BsonDocument());
 
-            return await cursor.ToListAsync();
+            return _mapper.Map<ICollection<Request>>(await cursor.ToListAsync());
         }
 
-        public async Task<Request> Get(int id)
+        public async Task<Request> Get(string id)
         {
-            var collection = _database.GetCollection<Request>(CollectionName);
-            var cursor = await collection.FindAsync(Builders<Request>.Filter.Eq(nameof(Request.Id), id));
+            var collection = _database.GetCollection<RequestDocument>(CollectionName);
+            var cursor = await collection.FindAsync(Builders<RequestDocument>.Filter.Eq(
+                nameof(RequestDocument.Id), 
+                id
+            ));
 
-            return await cursor.FirstAsync();
+            return _mapper.Map<Request>(await cursor.FirstAsync());
         }
 
-        public Task<Request> Update(Request request)
+        public async Task<Request> Update(Request request)
         {
-            var collection = _database.GetCollection<Request>(CollectionName);
+            var collection = _database.GetCollection<RequestDocument>(CollectionName);
 
-            return collection.FindOneAndUpdateAsync(
-                Builders<Request>.Filter.Eq(nameof(Request.Id), request.Id),
-                Builders<Request>.Update.Set(nameof(Request.Note), request.Note)
-            );
+            return _mapper.Map<Request>(await collection.FindOneAndUpdateAsync(
+                Builders<RequestDocument>.Filter.Eq(nameof(RequestDocument.Id), request.Id),
+                Builders<RequestDocument>.Update.Set(nameof(RequestDocument.Note), request.Note)
+            ));
         }
 
         public Task Delete(Request request)
@@ -56,11 +65,14 @@ namespace UnikMarketing.Data.MongoDb.Repositories
             return Delete(request.Id);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(string id)
         {
-            return _database
-                .GetCollection<Request>(CollectionName)
-                .FindOneAndDeleteAsync(Builders<Request>.Filter.Eq(nameof(Request.Id), id));
+            _mapper.Map<Request>(await _database
+                .GetCollection<RequestDocument>(CollectionName)
+                .FindOneAndDeleteAsync(Builders<RequestDocument>.Filter.Eq(
+                    nameof(RequestDocument.Id), 
+                    id
+                )));
         }
     }
 }

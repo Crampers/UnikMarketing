@@ -19,7 +19,7 @@ namespace UnikMarketing.Business
             return _requestRepository.GetAll();
         }
 
-        public Task<Request> Get(int id)
+        public Task<Request> Get(string id)
         {
             return _requestRepository.Get(id);
         }
@@ -39,7 +39,7 @@ namespace UnikMarketing.Business
             return _requestRepository.Delete(request);
         }
 
-        public Task Delete(int id)
+        public Task Delete(string id)
         {
             return _requestRepository.Delete(id);
         }

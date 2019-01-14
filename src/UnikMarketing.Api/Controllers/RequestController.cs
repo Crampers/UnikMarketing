@@ -29,7 +29,7 @@ namespace UnikMarketing.Api.Controllers
 
         //GET /requests/{id} (Get requests with id)
         [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> GetRequest(int id)
+        public async Task<ActionResult<Request>> GetRequest(string id)
         {
             return Ok(await _requestService.Get(id));
         }
@@ -48,7 +48,7 @@ namespace UnikMarketing.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Request>> Update(int id, [FromBody] RequestDto requestDto)
+        public async Task<ActionResult<Request>> Update(string id, [FromBody] RequestDto requestDto)
         {
             var request = await _requestService.Get(id);
 
@@ -69,7 +69,7 @@ namespace UnikMarketing.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Request>> Update(int id)
+        public async Task<ActionResult<Request>> Update(string id)
         {
             var request = await _requestService.Get(id);
 
