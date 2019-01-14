@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using UnikMarketing.Data.MongoDb.Documents;
 using UnikMarketing.Domain;
 using UnikMarketing.Domain.Repositories;
 
@@ -12,52 +14,59 @@ namespace UnikMarketing.Data.MongoDb.Repositories
     {
         private const string CollectionName = "users";
         private readonly IMongoDatabase _mongoDatabase;
+        private readonly IMapper _mapper;
 
-        public UserRepository(IMongoDatabase mongoDatabase)
+        public UserRepository(IMongoDatabase mongoDatabase, IMapper mapper)
         {
             _mongoDatabase = mongoDatabase;
+            _mapper = mapper;
         }
 
         public async Task<User> Create(User user)
         {
-            var collection = _mongoDatabase.GetCollection<User>(CollectionName);
-            await collection.InsertOneAsync(user);
+            var document = _mapper.Map<UserDocument>(user);
+            var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
 
-            return user;
+            await collection.InsertOneAsync(document);
+
+            return _mapper.Map<User>(document);
         }
 
         public async Task<ICollection<User>> GetAll()
         {
-            var collection = _mongoDatabase.GetCollection<User>(CollectionName);
+            var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
             var cursor = await collection.FindAsync(new BsonDocument());
 
-            return await cursor.ToListAsync();
+            return _mapper.Map<ICollection<User>>(await cursor.ToListAsync());
         }
 
-        public async Task<User> Get(int id)
+        public async Task<User> Get(string id)
         {
-            var collection = _mongoDatabase.GetCollection<User>(CollectionName);
-            var cursor = await collection.FindAsync(Builders<User>.Filter.Eq(nameof(User.Id), id));
+            var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
+            var cursor = await collection.FindAsync(Builders<UserDocument>.Filter.Eq(
+                nameof(UserDocument.Id), 
+                id
+            ));
 
-            return await cursor.FirstOrDefaultAsync();
+            return _mapper.Map<User>(await cursor.FirstOrDefaultAsync());
         }
 
         public async Task<User> Update(User user)
         {
-            var collection = _mongoDatabase.GetCollection<User>(CollectionName);
+            var document = _mapper.Map<UserDocument>(user);
+            var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
             var projection = await collection.FindOneAndUpdateAsync(
-                Builders<User>.Filter.Eq(nameof(User.Id), user.Id), 
-                Builders<User>.Update
-                    .Set(nameof(User.Address), user.Address)
-                    .Set(nameof(User.Criteria), user.Criteria)
-                    .Set(nameof(User.Email), user.Email)
-                    .Set(nameof(User.Name), user.Name)
-                    .Set(nameof(User.Password), user.Password)
-                    .Set(nameof(User.Requests), user.Requests)
-                    .Set(nameof(User.ZipCode), user.ZipCode)
+                Builders<UserDocument>.Filter.Eq(nameof(UserDocument.Id), document.Id), 
+                Builders<UserDocument>.Update
+                    .Set(nameof(UserDocument.Address), document.Address)
+                    .Set(nameof(UserDocument.Criteria), document.Criteria)
+                    .Set(nameof(UserDocument.Email), document.Email)
+                    .Set(nameof(UserDocument.Name), document.Name)
+                    .Set(nameof(UserDocument.Password), document.Password)
+                    .Set(nameof(UserDocument.ZipCode), document.ZipCode)
             );
 
-            return projection;
+            return _mapper.Map<User>(projection);
         }
 
         public async Task Delete(User user)
@@ -65,10 +74,14 @@ namespace UnikMarketing.Data.MongoDb.Repositories
             await Delete(user.Id);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
-            var collection = _mongoDatabase.GetCollection<User>(CollectionName);
-            await collection.FindOneAndDeleteAsync(Builders<User>.Filter.Eq(nameof(User.Id), id));
+            var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
+
+            await collection.FindOneAndDeleteAsync(Builders<UserDocument>.Filter.Eq(
+                nameof(UserDocument.Id), 
+                id
+            ));
         }
     }
 }

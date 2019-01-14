@@ -12,7 +12,7 @@ namespace UnikMarketing.Business
             throw new NotImplementedException();
         }
 
-        public async Task<User> Get(int id)
+        public async Task<User> Get(string id)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace UnikMarketing.Business
             throw new NotImplementedException();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             throw new NotImplementedException();
         }
