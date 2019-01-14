@@ -9,7 +9,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
 {
     public class RequestRepository : IRequestRepository
     {
-        private const string CollectionName = "Requests";
+        private const string CollectionName = "requests";
         private readonly IMongoDatabase _database;
 
         public RequestRepository(IMongoDatabase database)
