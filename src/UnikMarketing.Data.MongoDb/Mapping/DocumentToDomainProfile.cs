@@ -11,22 +11,22 @@ namespace UnikMarketing.Data.MongoDb.Mapping
             CreateMap<RequestDocument, Request>();
             CreateMap<UserDocument, User>();
             CreateMap<CriteriaDocument, Criteria>()
-                .ForMember(
+                .ForPath(
                     member => member.Floor.Min,
                     options => options.MapFrom(source => source.FloorFrom)
-                ).ForMember(
+                ).ForPath(
                     member => member.Floor.Max,
                     options => options.MapFrom(source => source.FloorTo)
-                ).ForMember(
+                ).ForPath(
                     member => member.Size.Min,
                     options => options.MapFrom(source => source.SizeFrom)
-                ).ForMember(
+                ).ForPath(
                     member => member.Size.Max,
                     options => options.MapFrom(source => source.SizeTo)
-                ).ForMember(
+                ).ForPath(
                     member => member.Price.Min,
                     options => options.MapFrom(source => source.PriceFrom)
-                ).ForMember(
+                ).ForPath(
                     member => member.Price.Max,
                     options => options.MapFrom(source => source.PriceTo)
                 );
