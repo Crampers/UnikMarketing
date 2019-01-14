@@ -8,7 +8,11 @@ namespace UnikMarketing.Api.Mapping
     {
         public DtoToDomainProfile()
         {
-            CreateMap<UserDto, User>();
+            CreateMap<UserDto, User>()
+                .ForMember(
+                    destination => destination.Criteria, 
+                    options => options.NullSubstitute(new CriteriaDto())
+                );
             CreateMap<LocationDto, Location>();
             CreateMap(typeof(RangeDto<>), typeof(Range<>));
             CreateMap<CriteriaDto, Criteria>();
