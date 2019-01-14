@@ -1,11 +1,11 @@
 [  
-    {  
-        "_id":0,
-        "Email":"ssstenz@haha.com",
-        "Name":"Mathias",
-        "Password":"supersafe",
-        "Address":"Someaddress 2",
-        "ZipCode":"7100",
-        "Criteria":null
-    }
+	{  
+		"id":"5c3c71bf4d4b0b17709a7f3a",
+		"email":"ssstenz@haha.com",
+		"name":"Mathias",
+		"password":"supersafe",
+		"address":"Someaddress 2",
+		"zipCode":"7100",
+		"criteria":null
+	}
 ]
