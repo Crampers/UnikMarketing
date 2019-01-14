@@ -36,7 +36,7 @@ namespace UnikMarketing.Api.Controllers
 
         //GET /users/{id} (Gets user with id})
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> GetUser(int id)
+        public async Task<ActionResult<UserDto>> GetUser(string id)
         {
             var user = await _userRepository.Get(id);
 
@@ -52,7 +52,7 @@ namespace UnikMarketing.Api.Controllers
 
         //GET /users/{id}/requests (Gets a user's requests)
         [HttpGet("{id}/requests")]
-        public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(int id)
+        public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(string id)
         {
             var user = await _userRepository.Get(id);
 
@@ -68,7 +68,7 @@ namespace UnikMarketing.Api.Controllers
 
         //GET /users/{id}/criteria (Gets a user's criteria)
         [HttpGet("{id}/criteria")]
-        public async Task<ActionResult<Criteria>> GetUserCriteria(int id)
+        public async Task<ActionResult<Criteria>> GetUserCriteria(string id)
         {
             var user = await _userRepository.Get(id);
 
@@ -113,7 +113,7 @@ namespace UnikMarketing.Api.Controllers
 
         //PUT /users/{id} (Updates an user ex- new email)
         [HttpPut("{id}")]
-        public async Task<ActionResult<User>> UpdateUser(int id, [FromBody] UserDto userDto)
+        public async Task<ActionResult<User>> UpdateUser(string id, [FromBody] UserDto userDto)
         {
             var user = await _userRepository.Get(id);
 
@@ -154,7 +154,7 @@ namespace UnikMarketing.Api.Controllers
         //DELETE /users/{id} (Self explanatory)
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUser(int id)
+        public async Task<ActionResult> DeleteUser(string id)
         {
             var user = await _userRepository.Get(id);
 
