@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using UnikMarketing.Api.Models;
 using UnikMarketing.Domain;
@@ -12,9 +12,9 @@ namespace UnikMarketing.Api.Controllers
     [Route("users")]
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
+        private readonly IUserRepository _userRepository;
 
         public UserController(IUserRepository userRepository, IMapper mapper, ILogger logger)
         {
@@ -89,7 +89,7 @@ namespace UnikMarketing.Api.Controllers
             var user = _mapper.Map<User>(userDto);
             var createdUserDto = _mapper.Map<UserDto>(await _userRepository.Create(user));
 
-            return CreatedAtAction("GetUser", new {createdUserDto.Id }, createdUserDto);
+            return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
         }
 
         /*TODO: Solve Request issue

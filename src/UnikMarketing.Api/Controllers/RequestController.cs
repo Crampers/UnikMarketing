@@ -11,8 +11,8 @@ namespace UnikMarketing.Api.Controllers
     [Route("requests")]
     public class RequestController : Controller
     {
-        private readonly IRequestService _requestService;
         private readonly IMapper _mapper;
+        private readonly IRequestService _requestService;
 
         public RequestController(IRequestService requestService, IMapper mapper)
         {

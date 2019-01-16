@@ -43,7 +43,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
         {
             var collection = _database.GetCollection<RequestDocument>(CollectionName);
             var cursor = await collection.FindAsync(Builders<RequestDocument>.Filter.Eq(
-                nameof(RequestDocument.Id), 
+                nameof(RequestDocument.Id),
                 id
             ));
 
@@ -70,7 +70,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
             _mapper.Map<Request>(await _database
                 .GetCollection<RequestDocument>(CollectionName)
                 .FindOneAndDeleteAsync(Builders<RequestDocument>.Filter.Eq(
-                    nameof(RequestDocument.Id), 
+                    nameof(RequestDocument.Id),
                     id
                 )));
         }
