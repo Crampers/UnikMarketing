@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -54,16 +55,17 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}/requests")]
         public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(string id)
         {
-            var user = await _userRepository.Get(id);
+            throw new NotImplementedException();
+            //var user = await _userRepository.Get(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var requestDtos = _mapper.Map<ICollection<RequestDto>>(user.Requests);
+            //var requestDtos = _mapper.Map<ICollection<RequestDto>>(user.Requests);
 
-            return Ok(requestDtos);
+            //return Ok(requestDtos);
         }
 
         //GET /users/{id}/criteria (Gets a user's criteria)
