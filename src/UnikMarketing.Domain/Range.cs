@@ -7,7 +7,7 @@
             Min = min;
             Max = max;
         }
-        
+
         public T Min { get; }
         public T Max { get; }
     }

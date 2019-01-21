@@ -10,7 +10,7 @@ namespace UnikMarketing.Api.Mapping
         {
             CreateMap<UserDto, User>()
                 .ForMember(
-                    destination => destination.Criteria, 
+                    destination => destination.Criteria,
                     options => options.NullSubstitute(new CriteriaDto())
                 );
             CreateMap<LocationDto, Location>();
