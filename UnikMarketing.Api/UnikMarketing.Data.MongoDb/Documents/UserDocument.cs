@@ -3,10 +3,11 @@ using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace UnikMarketing.Data.MongoDb.Documents
 {
-    class UserDocument
+    internal class UserDocument
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
+
         public string Email { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }

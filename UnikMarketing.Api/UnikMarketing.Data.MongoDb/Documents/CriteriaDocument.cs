@@ -1,6 +1,6 @@
 ﻿namespace UnikMarketing.Data.MongoDb.Documents
 {
-    class CriteriaDocument
+    internal class CriteriaDocument
     {
         public decimal SizeFrom { get; set; }
         public decimal SizeTo { get; set; }

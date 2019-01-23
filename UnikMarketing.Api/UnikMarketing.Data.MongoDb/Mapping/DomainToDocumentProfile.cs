@@ -4,7 +4,7 @@ using UnikMarketing.Domain;
 
 namespace UnikMarketing.Data.MongoDb.Mapping
 {
-    class DomainToDocumentProfile : Profile
+    internal class DomainToDocumentProfile : Profile
     {
         public DomainToDocumentProfile()
         {

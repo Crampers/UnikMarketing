@@ -4,31 +4,23 @@ using UnikMarketing.Domain;
 
 namespace UnikMarketing.Data.MongoDb.Mapping
 {
-    class DocumentToDomainProfile : Profile
+    internal class DocumentToDomainProfile : Profile
     {
         public DocumentToDomainProfile()
         {
             CreateMap<RequestDocument, Request>();
             CreateMap<UserDocument, User>();
+            CreateMap<Location, Location>();
             CreateMap<CriteriaDocument, Criteria>()
                 .ForPath(
-                    member => member.Floor.Min,
-                    options => options.MapFrom(source => source.FloorFrom)
+                    member => member.Floor,
+                    options => options.MapFrom(source => new Range<int>(source.FloorFrom, source.FloorTo))
                 ).ForPath(
-                    member => member.Floor.Max,
-                    options => options.MapFrom(source => source.FloorTo)
+                    member => member.Size,
+                    options => options.MapFrom(source => new Range<decimal>(source.SizeFrom, source.SizeTo))
                 ).ForPath(
-                    member => member.Size.Min,
-                    options => options.MapFrom(source => source.SizeFrom)
-                ).ForPath(
-                    member => member.Size.Max,
-                    options => options.MapFrom(source => source.SizeTo)
-                ).ForPath(
-                    member => member.Price.Min,
-                    options => options.MapFrom(source => source.PriceFrom)
-                ).ForPath(
-                    member => member.Price.Max,
-                    options => options.MapFrom(source => source.PriceTo)
+                    member => member.Price,
+                    options => options.MapFrom(source => new Range<decimal>(source.PriceFrom, source.PriceTo))
                 );
         }
     }

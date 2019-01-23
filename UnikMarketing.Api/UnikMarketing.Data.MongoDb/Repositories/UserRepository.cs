@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MongoDB.Bson;
@@ -13,8 +12,8 @@ namespace UnikMarketing.Data.MongoDb.Repositories
     public class UserRepository : IUserRepository
     {
         private const string CollectionName = "users";
-        private readonly IMongoDatabase _mongoDatabase;
         private readonly IMapper _mapper;
+        private readonly IMongoDatabase _mongoDatabase;
 
         public UserRepository(IMongoDatabase mongoDatabase, IMapper mapper)
         {
@@ -44,7 +43,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
         {
             var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
             var cursor = await collection.FindAsync(Builders<UserDocument>.Filter.Eq(
-                nameof(UserDocument.Id), 
+                nameof(UserDocument.Id),
                 id
             ));
 
@@ -56,7 +55,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
             var document = _mapper.Map<UserDocument>(user);
             var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
             var projection = await collection.FindOneAndUpdateAsync(
-                Builders<UserDocument>.Filter.Eq(nameof(UserDocument.Id), document.Id), 
+                Builders<UserDocument>.Filter.Eq(nameof(UserDocument.Id), document.Id),
                 Builders<UserDocument>.Update
                     .Set(nameof(UserDocument.Address), document.Address)
                     .Set(nameof(UserDocument.Criteria), document.Criteria)
@@ -79,7 +78,7 @@ namespace UnikMarketing.Data.MongoDb.Repositories
             var collection = _mongoDatabase.GetCollection<UserDocument>(CollectionName);
 
             await collection.FindOneAndDeleteAsync(Builders<UserDocument>.Filter.Eq(
-                nameof(UserDocument.Id), 
+                nameof(UserDocument.Id),
                 id
             ));
         }

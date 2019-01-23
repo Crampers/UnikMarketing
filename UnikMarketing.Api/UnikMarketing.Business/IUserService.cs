@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnikMarketing.Domain;
+
 namespace UnikMarketing.Business
 {
     public interface IUserService

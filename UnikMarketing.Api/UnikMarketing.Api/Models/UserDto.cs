@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using UnikMarketing.Domain;
+﻿using System.Collections.Generic;
 
 namespace UnikMarketing.Api.Models
 {
