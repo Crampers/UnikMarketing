@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using UnikMarketing.Api.Models;
 using UnikMarketing.Domain;
-using UnikMarketing.Domain.Repositories;
 
 namespace UnikMarketing.Api.Controllers
 {
@@ -15,11 +14,9 @@ namespace UnikMarketing.Api.Controllers
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
 
-        public UserController(IUserRepository userRepository, IMapper mapper, ILogger logger)
+        public UserController(IMapper mapper, ILogger logger)
         {
-            _userRepository = userRepository;
             _mapper = mapper;
             _logger = logger;
         }
@@ -29,7 +26,8 @@ namespace UnikMarketing.Api.Controllers
         public async Task<ActionResult<ICollection<UserDto>>> GetUsers()
         {
             //_logger.Information("Get Me!");
-            var users = await _userRepository.GetAll();
+            throw new NotImplementedException();
+            ICollection<User> users = null;
             var usersDtos = _mapper.Map<ICollection<UserDto>>(users);
 
             return Ok(usersDtos);
@@ -39,7 +37,8 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
         {
-            var user = await _userRepository.Get(id);
+            throw new NotImplementedException();
+            User user = null;
 
             if (user == null)
             {
@@ -72,7 +71,8 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}/criteria")]
         public async Task<ActionResult<Criteria>> GetUserCriteria(string id)
         {
-            var user = await _userRepository.Get(id);
+            throw new NotImplementedException();
+            User user = null;
 
             if (user == null)
             {
@@ -88,10 +88,11 @@ namespace UnikMarketing.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
         {
+            throw new NotImplementedException();
             var user = _mapper.Map<User>(userDto);
-            var createdUserDto = _mapper.Map<UserDto>(await _userRepository.Create(user));
+            //var createdUserDto = _mapper.Map<UserDto>(await _userRepository.Create(user));
 
-            return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
+            //return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
         }
 
         /*TODO: Solve Request issue
@@ -117,7 +118,9 @@ namespace UnikMarketing.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(string id, [FromBody] UserDto userDto)
         {
-            var user = await _userRepository.Get(id);
+
+            throw new NotImplementedException();
+            User user = null;
 
             if (user == null)
             {
@@ -130,7 +133,7 @@ namespace UnikMarketing.Api.Controllers
             }
 
             var updatedUser = _mapper.Map<User>(userDto);
-            var updatedUserDto = _mapper.Map<UserDto>(await _userRepository.Update(updatedUser));
+            var updatedUserDto = _mapper.Map<UserDto>(null);
 
             return Ok(updatedUserDto);
         }
@@ -158,7 +161,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(string id)
         {
-            var user = await _userRepository.Get(id);
+            User user = null;
 
             if (user == null)
             {
@@ -170,7 +173,7 @@ namespace UnikMarketing.Api.Controllers
                 return BadRequest();
             }
 
-            await _userRepository.Delete(id);
+            //await _userRepository.Delete(id);
 
             return NoContent();
         }

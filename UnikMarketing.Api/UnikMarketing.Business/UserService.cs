@@ -2,37 +2,29 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnikMarketing.Domain;
-using UnikMarketing.Domain.Repositories;
 
 namespace UnikMarketing.Business
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
-
-        public UserService(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
-
         public Task<ICollection<User>> GetAll()
         {
-            return _userRepository.GetAll();
+            throw new NotImplementedException();
         }
 
         public Task<User> Get(string id)
         {
-            return _userRepository.Get(id);
+            throw new NotImplementedException();
         }
 
         public Task<User> Create(User user)
         {
-            return _userRepository.Create(user);
+            throw new NotImplementedException();
         }
 
         public Task<User> Update(User user)
         {
-            return _userRepository.Update(user);
+            throw new NotImplementedException();
         }
 
         public Task<User> UpdateCriteria(User user, Criteria criteria)

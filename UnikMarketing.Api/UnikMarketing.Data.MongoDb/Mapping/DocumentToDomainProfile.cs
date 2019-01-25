@@ -8,8 +8,8 @@ namespace UnikMarketing.Data.MongoDb.Mapping
     {
         public DocumentToDomainProfile()
         {
-            CreateMap<RequestDocument, Request>();
-            CreateMap<UserDocument, User>();
+            CreateMap<RequestDocument, Domain.Request>();
+            CreateMap<UserDocument, Domain.User>();
             CreateMap<Location, Location>();
             CreateMap<CriteriaDocument, Criteria>()
                 .ForPath(

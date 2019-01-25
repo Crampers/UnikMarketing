@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using UnikMarketing.Data.MongoDb.Documents;
 using UnikMarketing.Data.Queries.Request;
 
-namespace UnikMarketing.Data.MongoDb.Queries.Request.Handlers
+namespace UnikMarketing.Data.MongoDb.Request.Queries.Handlers
 {
     public class GetRequestByIdQueryHandler : IQueryHandler<GetRequestByIdQuery, Domain.Request>
     {
