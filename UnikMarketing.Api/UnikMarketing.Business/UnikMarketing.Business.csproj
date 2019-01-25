@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UnikMarketing.Data\UnikMarketing.Data.csproj" />
     <ProjectReference Include="..\UnikMarketing.Domain\UnikMarketing.Domain.csproj" />
   </ItemGroup>
 
