@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Request\Commands\" />
     <Folder Include="User\Commands\" />
   </ItemGroup>
 

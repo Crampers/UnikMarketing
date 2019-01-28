@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using Serilog;
 using UnikMarketing.Business;
 using UnikMarketing.Data;
+using UnikMarketing.Data.MongoDb.Request.Commands.Handlers;
 using UnikMarketing.Data.MongoDb.Request.Queries.Handlers;
 using UnikMarketing.Data.MongoDb.User.Queries.Handlers;
 using UnikMarketing.Data.Queries.Request;
@@ -39,6 +40,7 @@ namespace UnikMarketing.Api
             services.AddTransient<IQueryProcessor, QueryProcessor>(provider => new QueryProcessor(provider));
             services.AddTransient<IQueryHandler<GetRequestByIdQuery, Request>, GetRequestByIdQueryHandler>();
             services.AddTransient<IQueryHandler<GetUserByIdQuery, User>, GetUserByIdQueryHandler>();
+            services.AddTransient<ICommandHandler<CreateRequestCommand>, CreateRequestCommandHandler>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
             services.AddSingleton<ILogger>(provider =>
