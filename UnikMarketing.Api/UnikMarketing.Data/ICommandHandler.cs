@@ -6,4 +6,9 @@ namespace UnikMarketing.Data
     {
         Task Handle(TCommand command);
     }
+
+    public interface ICommandHandler<in TCommand, TResult>
+    {
+        Task<TResult> Handle(TCommand command);
+    }
 }

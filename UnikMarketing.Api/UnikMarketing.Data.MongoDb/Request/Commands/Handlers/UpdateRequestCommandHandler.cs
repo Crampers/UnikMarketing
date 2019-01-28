@@ -6,7 +6,7 @@ using UnikMarketing.Data.Request.Commands;
 
 namespace UnikMarketing.Data.MongoDb.Request.Commands.Handlers
 {
-    public class UpdateRequestCommandHandler : ICommandHandler<UpdateRequestCommand>
+    public class UpdateRequestCommandHandler : ICommandHandler<UpdateRequestCommand, Domain.Request>
     {
         private readonly IMongoDatabase _database;
         private readonly IMapper _mapper;
@@ -17,14 +17,14 @@ namespace UnikMarketing.Data.MongoDb.Request.Commands.Handlers
             _mapper = mapper;
         }
 
-        public async Task Handle(UpdateRequestCommand command)
+        public async Task<Domain.Request> Handle(UpdateRequestCommand command)
         {
             var collection = _database.GetCollection<RequestDocument>(Collections.Requests);
 
-            await collection.FindOneAndUpdateAsync(
+            return _mapper.Map<Domain.Request>(await collection.FindOneAndUpdateAsync<RequestDocument>(
                 Builders<RequestDocument>.Filter.Eq(nameof(RequestDocument.Id), command.Request.Id),
                 Builders<RequestDocument>.Update.Set(nameof(RequestDocument.Note), command.Request.Note)
-            );
+            ));
         }
     }
 }

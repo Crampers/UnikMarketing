@@ -45,8 +45,8 @@ namespace UnikMarketing.Api
             services.AddTransient<IQueryHandler<GetRequestByIdQuery, Request>, GetRequestByIdQueryHandler>();
             services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Request>>, GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUserByIdQuery, User>, GetUserByIdQueryHandler>();
-            services.AddTransient<ICommandHandler<CreateRequestCommand>, CreateRequestCommandHandler>();
-            services.AddTransient<ICommandHandler<UpdateRequestCommand>, UpdateRequestCommandHandler>();
+            services.AddTransient<ICommandHandler<CreateRequestCommand, Request>, CreateRequestCommandHandler>();
+            services.AddTransient<ICommandHandler<UpdateRequestCommand, Request>, UpdateRequestCommandHandler>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
             services.AddSingleton<ILogger>(provider =>
