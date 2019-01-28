@@ -16,6 +16,7 @@ using UnikMarketing.Data.Queries.Request;
 using UnikMarketing.Data.Queries.User;
 using UnikMarketing.Data.Request.Commands;
 using UnikMarketing.Data.Request.Queries;
+using UnikMarketing.Data.User.Queries;
 using UnikMarketing.Domain;
 
 namespace UnikMarketing.Api
@@ -45,6 +46,7 @@ namespace UnikMarketing.Api
             services.AddTransient<IQueryHandler<GetRequestByIdQuery, Request>, GetRequestByIdQueryHandler>();
             services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Request>>, GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUserByIdQuery, User>, GetUserByIdQueryHandler>();
+            services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<User>>, GetUsersQueryHandler>();
             services.AddTransient<ICommandHandler<CreateRequestCommand, Request>, CreateRequestCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateRequestCommand, Request>, UpdateRequestCommandHandler>();
             services.AddTransient<ICommandHandler<DeleteRequestCommand>, DeleteRequestCommandHandler>();
