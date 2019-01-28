@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +14,7 @@ using UnikMarketing.Data.MongoDb.Request.Queries.Handlers;
 using UnikMarketing.Data.MongoDb.User.Queries.Handlers;
 using UnikMarketing.Data.Queries.Request;
 using UnikMarketing.Data.Queries.User;
+using UnikMarketing.Data.Request.Queries;
 using UnikMarketing.Domain;
 
 namespace UnikMarketing.Api
@@ -39,6 +42,7 @@ namespace UnikMarketing.Api
             services.AddTransient<IRequestService, RequestService>();
             services.AddTransient<IQueryProcessor, QueryProcessor>(provider => new QueryProcessor(provider));
             services.AddTransient<IQueryHandler<GetRequestByIdQuery, Request>, GetRequestByIdQueryHandler>();
+            services.AddTransient<IQueryHandler<GetRequests, ICollection<Request>>, GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUserByIdQuery, User>, GetUserByIdQueryHandler>();
             services.AddTransient<ICommandHandler<CreateRequestCommand>, CreateRequestCommandHandler>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
