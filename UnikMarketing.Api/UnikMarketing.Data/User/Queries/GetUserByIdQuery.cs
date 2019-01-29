@@ -1,4 +1,4 @@
-﻿namespace UnikMarketing.Data.Queries.User
+﻿namespace UnikMarketing.Data.User.Queries
 {
     public class GetUserByIdQuery : IQuery<Domain.User>
     {

@@ -2,6 +2,7 @@
 using AutoMapper;
 using MongoDB.Driver;
 using UnikMarketing.Data.MongoDb.Documents;
+using UnikMarketing.Data.Request.Commands;
 
 namespace UnikMarketing.Data.MongoDb.Request.Commands.Handlers
 {

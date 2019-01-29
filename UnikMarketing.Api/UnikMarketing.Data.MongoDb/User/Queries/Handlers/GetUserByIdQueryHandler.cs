@@ -2,7 +2,7 @@
 using AutoMapper;
 using MongoDB.Driver;
 using UnikMarketing.Data.MongoDb.Documents;
-using UnikMarketing.Data.Queries.User;
+using UnikMarketing.Data.User.Queries;
 
 namespace UnikMarketing.Data.MongoDb.User.Queries.Handlers
 {
