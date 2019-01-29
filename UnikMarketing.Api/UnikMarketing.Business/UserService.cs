@@ -1,30 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnikMarketing.Data;
+using UnikMarketing.Data.Queries.User;
+using UnikMarketing.Data.User.Commands;
+using UnikMarketing.Data.User.Queries;
 using UnikMarketing.Domain;
 
 namespace UnikMarketing.Business
 {
     public class UserService : IUserService
     {
+        private readonly IDataProcessor _dataProcessor;
+
+        public UserService(IDataProcessor dataProcessor)
+        {
+            _dataProcessor = dataProcessor;
+        }
+
         public Task<ICollection<User>> GetAll()
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new GetUsersQuery());
         }
 
         public Task<User> Get(string id)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new GetUserByIdQuery(id));
         }
 
         public Task<User> Create(User user)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new CreateUserCommand(user));
         }
 
         public Task<User> Update(User user)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new UpdateUserCommand(user));
         }
 
         public Task<User> UpdateCriteria(User user, Criteria criteria)
@@ -40,7 +51,7 @@ namespace UnikMarketing.Business
 
         public Task Delete(string id)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new DeleteUserCommand(id));
         }
     }
 }
