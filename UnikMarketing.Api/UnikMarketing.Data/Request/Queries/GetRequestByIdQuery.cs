@@ -1,4 +1,4 @@
-﻿namespace UnikMarketing.Data.Queries.Request
+﻿namespace UnikMarketing.Data.Request.Queries
 {
     public class GetRequestByIdQuery : IQuery<Domain.Request>
     {

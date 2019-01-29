@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnikMarketing.Data;
-using UnikMarketing.Data.Queries.User;
 using UnikMarketing.Data.User.Commands;
 using UnikMarketing.Data.User.Queries;
 using UnikMarketing.Domain;

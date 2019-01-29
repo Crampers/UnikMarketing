@@ -8,10 +8,8 @@ namespace UnikMarketing.Data.MongoDb.Documents
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
 
-        [BsonElement("note")]
-        public string Note { get; set; }
+        [BsonElement("note")] public string Note { get; set; }
 
-        [BsonElement("user_id")]
-        public string UserId { get; set; }
+        [BsonElement("user_id")] public string UserId { get; set; }
     }
 }

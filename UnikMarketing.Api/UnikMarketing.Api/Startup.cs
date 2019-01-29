@@ -13,8 +13,6 @@ using UnikMarketing.Data.MongoDb.Request.Commands.Handlers;
 using UnikMarketing.Data.MongoDb.Request.Queries.Handlers;
 using UnikMarketing.Data.MongoDb.User.Commands;
 using UnikMarketing.Data.MongoDb.User.Queries.Handlers;
-using UnikMarketing.Data.Queries.Request;
-using UnikMarketing.Data.Queries.User;
 using UnikMarketing.Data.Request.Commands;
 using UnikMarketing.Data.Request.Queries;
 using UnikMarketing.Data.User.Commands;

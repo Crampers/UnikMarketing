@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnikMarketing.Data;
-using UnikMarketing.Data.MongoDb.Request.Commands.Handlers;
-using UnikMarketing.Data.Queries.Request;
 using UnikMarketing.Data.Request.Commands;
 using UnikMarketing.Data.Request.Queries;
 using UnikMarketing.Domain;

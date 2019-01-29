@@ -1,4 +1,4 @@
-﻿namespace UnikMarketing.Data.MongoDb.Request.Commands.Handlers
+﻿namespace UnikMarketing.Data.Request.Commands
 {
     public class CreateRequestCommand : ICommand<Domain.Request>
     {
