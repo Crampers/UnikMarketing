@@ -1,40 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnikMarketing.Data;
+using UnikMarketing.Data.MongoDb.Request.Commands.Handlers;
+using UnikMarketing.Data.Queries.Request;
+using UnikMarketing.Data.Request.Commands;
+using UnikMarketing.Data.Request.Queries;
 using UnikMarketing.Domain;
 
 namespace UnikMarketing.Business
 {
     public class RequestService : IRequestService
     {
+        private readonly IDataProcessor _dataProcessor;
+
+        public RequestService(IDataProcessor dataProcessor)
+        {
+            _dataProcessor = dataProcessor;
+        }
+
         public Task<ICollection<Request>> GetAll()
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new GetRequestsQuery());
         }
 
         public Task<Request> Get(string id)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new GetRequestByIdQuery(id));
         }
 
         public Task<Request> Create(Request request)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new CreateRequestCommand(request));
         }
 
         public Task<Request> Update(Request request)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new UpdateRequestCommand(request));
         }
 
         public Task Delete(Request request)
         {
-            throw new NotImplementedException();
+            return Delete(request.Id);
         }
 
         public Task Delete(string id)
         {
-            throw new NotImplementedException();
+            return _dataProcessor.Process(new DeleteRequestCommand(id));
         }
     }
 }
