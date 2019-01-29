@@ -11,11 +11,13 @@ using UnikMarketing.Business;
 using UnikMarketing.Data;
 using UnikMarketing.Data.MongoDb.Request.Commands.Handlers;
 using UnikMarketing.Data.MongoDb.Request.Queries.Handlers;
+using UnikMarketing.Data.MongoDb.User.Commands;
 using UnikMarketing.Data.MongoDb.User.Queries.Handlers;
 using UnikMarketing.Data.Queries.Request;
 using UnikMarketing.Data.Queries.User;
 using UnikMarketing.Data.Request.Commands;
 using UnikMarketing.Data.Request.Queries;
+using UnikMarketing.Data.User.Commands;
 using UnikMarketing.Data.User.Queries;
 using UnikMarketing.Domain;
 
@@ -50,6 +52,7 @@ namespace UnikMarketing.Api
             services.AddTransient<ICommandHandler<CreateRequestCommand, Request>, CreateRequestCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateRequestCommand, Request>, UpdateRequestCommandHandler>();
             services.AddTransient<ICommandHandler<DeleteRequestCommand>, DeleteRequestCommandHandler>();
+            services.AddTransient<ICommandHandler<CreateUserCommand, User>, CreateUserCommandHandler>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
             services.AddSingleton<ILogger>(provider =>
