@@ -54,6 +54,7 @@ namespace UnikMarketing.Api
             services.AddTransient<ICommandHandler<DeleteRequestCommand>, DeleteRequestCommandHandler>();
             services.AddTransient<ICommandHandler<CreateUserCommand, User>, CreateUserCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateUserCommand, User>, UpdateUserCommandHandler>();
+            services.AddTransient<ICommandHandler<DeleteUserCommand>, DeleteUserCommandHandler>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
             services.AddSingleton<ILogger>(provider =>
