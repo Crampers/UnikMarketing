@@ -14,11 +14,13 @@ namespace UnikMarketing.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly IRequestService _requestService;
 
-        public UserController(IMapper mapper, IUserService userService)
+        public UserController(IMapper mapper, IUserService userService, IRequestService requestService)
         {
             _mapper = mapper;
             _userService = userService;
+            _requestService = requestService;
         }
 
         //GET /users (Gets all users)
@@ -51,17 +53,10 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}/requests")]
         public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(string id)
         {
-            throw new NotImplementedException();
-            //var user = await _userRepository.Get(id);
+            var requests = await _requestService.GetByUser(id);
+            var requestDtos = _mapper.Map<ICollection<RequestDto>>(requests);
 
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var requestDtos = _mapper.Map<ICollection<RequestDto>>(user.Requests);
-
-            //return Ok(requestDtos);
+            return Ok(requestDtos);
         }
         
         //POST /users (Creates new users)

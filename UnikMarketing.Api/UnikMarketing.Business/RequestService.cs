@@ -45,5 +45,13 @@ namespace UnikMarketing.Business
         {
             return _dataProcessor.Process(new DeleteRequestCommand(id));
         }
+
+        public Task<ICollection<Request>> GetByUser(string id)
+        {
+            return _dataProcessor.Process(new GetRequestsQuery
+            {
+                UserId = id
+            });
+        }
     }
 }

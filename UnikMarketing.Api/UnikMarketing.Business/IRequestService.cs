@@ -12,5 +12,6 @@ namespace UnikMarketing.Business
         Task<Request> Update(Request request);
         Task Delete(Request request);
         Task Delete(string id);
+        Task<ICollection<Request>> GetByUser(string id);
     }
 }

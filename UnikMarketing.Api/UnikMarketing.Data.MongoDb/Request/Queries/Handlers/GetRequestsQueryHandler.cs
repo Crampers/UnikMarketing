@@ -22,7 +22,15 @@ namespace UnikMarketing.Data.MongoDb.Request.Queries.Handlers
         public async Task<ICollection<Domain.Request>> Handle(GetRequestsQuery query)
         {
             var collection = _database.GetCollection<RequestDocument>(Collections.Requests);
-            var cursor = await collection.FindAsync(new BsonDocument());
+            var builder = Builders<RequestDocument>.Filter;
+
+            if (query.UserId != null)
+            {
+                builder.Eq(nameof(RequestDocument.UserId), query.UserId);
+            }
+
+
+            var cursor = await collection.FindAsync(builder.ToBsonDocument());
 
             return _mapper.Map<ICollection<Domain.Request>>(await cursor.ToListAsync());
         }
