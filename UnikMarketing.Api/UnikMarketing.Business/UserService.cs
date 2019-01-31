@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnikMarketing.Data;
 using UnikMarketing.Data.User.Commands;
@@ -22,9 +23,14 @@ namespace UnikMarketing.Business
             return _dataProcessor.Process(new GetUsersQuery());
         }
 
-        public Task<User> Get(string id)
+        public async Task<User> Get(string id)
         {
-            return _dataProcessor.Process(new GetUserByIdQuery(id));
+            var requests = await _dataProcessor.Process(new GetUsersQuery
+            {
+                Ids = { id }
+            });
+
+            return requests.SingleOrDefault();
         }
 
         public Task<User> Create(User user)
