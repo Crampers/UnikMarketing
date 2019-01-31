@@ -68,26 +68,7 @@ namespace UnikMarketing.Api.Controllers
 
             return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
         }
-
-        /*TODO: Solve Request issue
-        //POST /users/{id}/requests (Creates a user's requests)
-        //[HttpPost("{id}/requests")]
-        //public async Task<ActionResult<User>> CreateUserRequest(int id, [FromBody] RequestDto requestDto)
-        //{
-        //    var user = await _userRepository.Get(id);
-
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var request = _mapper.Map<Request>(requestDto);
-        //    var createdRequest = await _userRepository.AddRequest(user, request);
-
-        //    return CreatedAtAction("GetRequest", "Request", new { id = createdRequest.Id }, createdRequest);
-        //}
-        */
-
+        
         //PUT /users/{id} (Updates an user ex- new email)
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(string id, [FromBody] UserDto userDto)

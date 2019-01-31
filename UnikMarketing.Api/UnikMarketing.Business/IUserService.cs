@@ -10,8 +10,6 @@ namespace UnikMarketing.Business
         Task<User> Get(string id);
         Task<User> Create(User user);
         Task<User> Update(User user);
-        Task<User> UpdateCriteria(User user, Criteria criteria);
-        Task<User> AddRequest(User user, Request request);
         Task Delete(string id);
     }
 }

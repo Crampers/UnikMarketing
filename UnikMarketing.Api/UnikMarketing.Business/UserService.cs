@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnikMarketing.Data;
@@ -41,17 +40,6 @@ namespace UnikMarketing.Business
         public Task<User> Update(User user)
         {
             return _dataProcessor.Process(new UpdateUserCommand(user));
-        }
-
-        public Task<User> UpdateCriteria(User user, Criteria criteria)
-        {
-            user.Criteria = criteria;
-            throw new NotImplementedException();
-        }
-
-        public Task<User> AddRequest(User user, Request request)
-        {
-            throw new NotImplementedException();
         }
 
         public Task Delete(string id)
