@@ -3,33 +3,29 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 using UnikMarketing.Api.Models;
+using UnikMarketing.Business;
 using UnikMarketing.Domain;
-using UnikMarketing.Domain.Repositories;
 
 namespace UnikMarketing.Api.Controllers
 {
     [Route("users")]
     public class UserController : Controller
     {
-        private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UserController(IUserRepository userRepository, IMapper mapper, ILogger logger)
+        public UserController(IMapper mapper, IUserService userService)
         {
-            _userRepository = userRepository;
             _mapper = mapper;
-            _logger = logger;
+            _userService = userService;
         }
 
         //GET /users (Gets all users)
         [HttpGet]
         public async Task<ActionResult<ICollection<UserDto>>> GetUsers()
         {
-            //_logger.Information("Get Me!");
-            var users = await _userRepository.GetAll();
+            var users = await _userService.GetAll();
             var usersDtos = _mapper.Map<ICollection<UserDto>>(users);
 
             return Ok(usersDtos);
@@ -39,7 +35,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
         {
-            var user = await _userRepository.Get(id);
+            var user = await _userService.Get(id);
 
             if (user == null)
             {
@@ -72,7 +68,8 @@ namespace UnikMarketing.Api.Controllers
         [HttpGet("{id}/criteria")]
         public async Task<ActionResult<Criteria>> GetUserCriteria(string id)
         {
-            var user = await _userRepository.Get(id);
+            throw new NotImplementedException();
+            User user = null;
 
             if (user == null)
             {
@@ -89,7 +86,7 @@ namespace UnikMarketing.Api.Controllers
         public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            var createdUserDto = _mapper.Map<UserDto>(await _userRepository.Create(user));
+            var createdUserDto = _mapper.Map<UserDto>(await _userService.Create(user));
 
             return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
         }
@@ -117,7 +114,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(string id, [FromBody] UserDto userDto)
         {
-            var user = await _userRepository.Get(id);
+            var user = _userService.Get(id);
 
             if (user == null)
             {
@@ -130,7 +127,7 @@ namespace UnikMarketing.Api.Controllers
             }
 
             var updatedUser = _mapper.Map<User>(userDto);
-            var updatedUserDto = _mapper.Map<UserDto>(await _userRepository.Update(updatedUser));
+            var updatedUserDto = _mapper.Map<UserDto>(await _userService.Update(updatedUser));
 
             return Ok(updatedUserDto);
         }
@@ -158,7 +155,7 @@ namespace UnikMarketing.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(string id)
         {
-            var user = await _userRepository.Get(id);
+            var user = await _userService.Get(id);
 
             if (user == null)
             {
@@ -170,7 +167,7 @@ namespace UnikMarketing.Api.Controllers
                 return BadRequest();
             }
 
-            await _userRepository.Delete(id);
+            await _userService.Delete(id);
 
             return NoContent();
         }
