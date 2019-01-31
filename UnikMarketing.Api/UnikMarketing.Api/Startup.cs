@@ -43,7 +43,6 @@ namespace UnikMarketing.Api
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRequestService, RequestService>();
             services.AddScoped<IDataProcessor, DataProcessor>();
-            services.AddTransient<IQueryHandler<GetRequestByIdQuery, Request>, GetRequestByIdQueryHandler>();
             services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Request>>, GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUserByIdQuery, User>, GetUserByIdQueryHandler>();
             services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<User>>, GetUsersQueryHandler>();

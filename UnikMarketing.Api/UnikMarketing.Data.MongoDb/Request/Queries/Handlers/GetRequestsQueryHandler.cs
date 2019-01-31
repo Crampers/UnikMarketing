@@ -25,7 +25,19 @@ namespace UnikMarketing.Data.MongoDb.Request.Queries.Handlers
             var collection = _database.GetCollection<RequestDocument>(Collections.Requests);
             var builder = Builders<RequestDocument>.Filter;
 
-            if (query.UserIds != null)
+            if (query.Ids?.Count > 0)
+            {
+                if (query.Ids.Count == 1)
+                {
+                    builder.Eq(nameof(RequestDocument.Id), query.Ids.First());
+                }
+                else
+                {
+                    builder.In(nameof(RequestDocument.Id), query.Ids);
+                }
+            }
+
+            if (query.UserIds?.Count > 0)
             {
                 if (query.UserIds.Count == 1)
                 {
