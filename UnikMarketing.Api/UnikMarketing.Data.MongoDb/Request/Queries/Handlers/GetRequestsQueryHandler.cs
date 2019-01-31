@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MongoDB.Bson;
@@ -24,12 +25,18 @@ namespace UnikMarketing.Data.MongoDb.Request.Queries.Handlers
             var collection = _database.GetCollection<RequestDocument>(Collections.Requests);
             var builder = Builders<RequestDocument>.Filter;
 
-            if (query.UserId != null)
+            if (query.UserIds != null)
             {
-                builder.Eq(nameof(RequestDocument.UserId), query.UserId);
+                if (query.UserIds.Count == 1)
+                {
+                    builder.Eq(nameof(RequestDocument.UserId), query.UserIds.First());
+                }
+                else
+                {
+                    builder.In(nameof(RequestDocument.UserId), query.UserIds);
+                }
             }
-
-
+            
             var cursor = await collection.FindAsync(builder.ToBsonDocument());
 
             return _mapper.Map<ICollection<Domain.Request>>(await cursor.ToListAsync());

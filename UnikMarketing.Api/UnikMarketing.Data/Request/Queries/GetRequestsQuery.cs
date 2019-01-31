@@ -4,6 +4,6 @@ namespace UnikMarketing.Data.Request.Queries
 {
     public class GetRequestsQuery : IQuery<ICollection<Domain.Request>>
     {
-        public string UserId { get; set; }
+        public List<string> UserIds { get; set; }
     }
 }
