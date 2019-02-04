@@ -19,7 +19,7 @@ namespace UnikMarketing.Integrations.Cli
                 string fileName = args[1];
                 SequelToJson sqJson = new SequelToJson(new SqlConnection(connectionString));
 
-                var jsonResult = sqJson.GetJsonDerulo();
+                var jsonResult = sqJson.GetJson();
                 File.WriteAllText(fileName, jsonResult);
             }
         }

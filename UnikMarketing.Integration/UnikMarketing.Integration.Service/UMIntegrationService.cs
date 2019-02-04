@@ -9,6 +9,8 @@ using KonvToolbox;
 using Quartz;
 using Quartz.Impl;
 using Serilog;
+using UnikMarketing.Integration.Service.Model;
+using UnikMarketing.Integration.Tools;
 
 namespace UnikMarketing.Integration.Service
 {
@@ -31,7 +33,8 @@ namespace UnikMarketing.Integration.Service
                 if (string.IsNullOrWhiteSpace(configurationPath))
                     _logger?.Fatal("Configuration file not found at \"{ConfigurationPath}\"", configurationPath);
 
-                _cron = CreateCronTab(ReadConfiguration(configurationPath)).Result;
+
+                _cron = SimonSays(ReadSimon()).Result;
             }
             catch (Exception e)
             {
@@ -39,9 +42,20 @@ namespace UnikMarketing.Integration.Service
                 EventLogHandler.WriteToEventLog(WinApiHelper.FlattenException(e), EventLogEntryType.Error);
             }
         }
+
+        private Simon ReadSimon()
+        {
+            return new Simon(
+                ConfigurationManager.ConnectionStrings["UnikBoligCon"].ConnectionString, 
+                ConfigurationManager.AppSettings["CronScheduleExpression"], 
+                (string)ConfigurationManager.GetSection("Destination"));
+        }
+
         private static ILogger CreateLogger()
         {
-            return new LoggerConfiguration().CreateLogger();
+            return new LoggerConfiguration()
+                .ReadFrom.AppSettings()
+                .CreateLogger();
         }
 
         protected override async void OnStart(string[] args)
@@ -58,56 +72,38 @@ namespace UnikMarketing.Integration.Service
             _logger?.Information("Stopped scheduler");
         }
 
-        private ICollection<Job> ReadConfiguration(string configurationPath)
-        {
-            if (configurationPath == null)
-            {
-                _logger?.Fatal("No export configuration file path specified in application settings");
-
-                throw new Exception("Invalid application configuration");
-            }
-
-            if (!File.Exists(configurationPath))
-            {
-                _logger?.Fatal("Export configuration file not found at path \"{ConfigurationPath}\"", configurationPath);
-
-                throw new Exception("Invalid application configuration");
-            }
-
-            return ConfigurationManager.GetSection(configurationPath, _logger);
-        }
-
-        private async Task<IScheduler> CreateCronTab(ICollection<Job> jobs)
+        private async Task<IScheduler> SimonSays(Simon simon)
         {
             var factory = new StdSchedulerFactory();
             var scheduler = await factory.GetScheduler();
 
             _logger?.Information("Setting up scheduler");
 
-            foreach (var job in jobs)
                 try
                 {
+                    //TODO: Proper Cron
                     await scheduler.ScheduleJob(
                         JobBuilder
                             .Create<DynamicJob>()
                             .UsingJobData(new JobDataMap
                             {
-                                {"action", new Func<Task>(job.Run)}
+                            //    {"action", new Func<Task>(() => SequelToJson.GetJson().Await())}
                             })
                             .Build(),
                         TriggerBuilder.Create()
-                            .WithCronSchedule(job.CronExpression, s => s.Build())
+                            .WithCronSchedule(simon.CronScheduleExpression, s => s.Build())
                             .Build()
                     );
                 }
                 catch (FormatException)
                 {
                     _logger?.Error(
-                        "Job \"{Name}\" was configured with an invalid cron expression (\"{CronExpression}\") and was skipped",
-                        job.Name,
-                        job.CronExpression
+                        "Simon \"{Destination}\" was configured with an invalid cron expression (\"{CronScheduleExpression}\") and was skipped",
+                        simon.Destination,
+                        simon.CronScheduleExpression
                     );
                 }
+            
 
             _logger?.Information("Finished setting up scheduler");
 

@@ -42,6 +42,9 @@
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog.Settings.AppSettings, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Settings.AppSettings.2.2.2\lib\net45\Serilog.Settings.AppSettings.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
     </Reference>
@@ -66,25 +69,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DynamicJob.cs" />
-    <Compile Include="UMIntegrationService.cs">
+    <Compile Include="Model\DynamicJob.cs" />
+    <Compile Include="Model\Simon.cs" />
+    <Compile Include="UmIntegrationService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UMIntegrationService.Designer.cs">
-      <DependentUpon>UMIntegrationService.cs</DependentUpon>
+    <Compile Include="UmIntegrationService.Designer.cs">
+      <DependentUpon>UmIntegrationService.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceInstaller.cs">
+    <Compile Include="Executeables\ServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ServiceInstaller.Designer.cs">
+    <Compile Include="Executeables\ServiceInstaller.Designer.cs">
       <DependentUpon>ServiceInstaller.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="Configs\App.config" />
+    <None Include="Configs\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UnikMarketing.Integration.Tools\UnikMarketing.Integration.Tools.csproj">
+      <Project>{CBA30553-4126-4174-9267-1B6AE0B5B473}</Project>
+      <Name>UnikMarketing.Integration.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

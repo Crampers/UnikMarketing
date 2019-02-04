@@ -10,6 +10,8 @@ namespace UnikMarketing.Integration.Tools
     public class SequelToJson
     {
         private readonly SqlConnection _sqlConnection;
+
+        #region Sql
         private readonly string RentalSql = @"
         SELECT 
             us.UdlejningsSagId
@@ -36,6 +38,7 @@ namespace UnikMarketing.Integration.Tools
         le.SelskabNr = lej.SelskabNr AND
         le.EjendomNr = lej.EjendomNr AND
         le.LejemaalNr = lej.LejemaalNr";
+        #endregion
 
         public SequelToJson(SqlConnection sqlConnection)
         {
@@ -80,7 +83,7 @@ namespace UnikMarketing.Integration.Tools
             return result;
         }
 
-        public string GetJsonDerulo()
+        public string GetJson()
         {
             return JsonConvert.SerializeObject(GetAll());
         }
