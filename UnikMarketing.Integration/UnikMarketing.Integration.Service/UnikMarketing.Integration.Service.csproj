@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\DynamicJob.cs" />
+    <Compile Include="Model\IntegrationJob.cs" />
     <Compile Include="Model\Simon.cs" />
     <Compile Include="UmIntegrationService.cs">
       <SubType>Component</SubType>

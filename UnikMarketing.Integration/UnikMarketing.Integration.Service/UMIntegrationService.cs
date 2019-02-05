@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.IO;
 using System.ServiceProcess;
-using System.Threading.Tasks;
 using KonvToolbox;
 using Quartz;
 using Quartz.Impl;
@@ -18,6 +15,7 @@ namespace UnikMarketing.Integration.Service
     {
         private readonly IScheduler _cron;
         private readonly ILogger _logger;
+
         public UmIntegrationService()
         {
             try
@@ -33,8 +31,7 @@ namespace UnikMarketing.Integration.Service
                 if (string.IsNullOrWhiteSpace(configurationPath))
                     _logger?.Fatal("Configuration file not found at \"{ConfigurationPath}\"", configurationPath);
 
-
-                _cron = SimonSays(ReadSimon()).Result;
+                _cron = SimonSays(ReadSimon());
             }
             catch (Exception e)
             {
@@ -46,9 +43,9 @@ namespace UnikMarketing.Integration.Service
         private Simon ReadSimon()
         {
             return new Simon(
-                ConfigurationManager.ConnectionStrings["UnikBoligCon"].ConnectionString, 
-                ConfigurationManager.AppSettings["CronScheduleExpression"], 
-                (string)ConfigurationManager.GetSection("Destination"));
+                ConfigurationManager.ConnectionStrings["UnikBoligCon"].ConnectionString,
+                ConfigurationManager.AppSettings["CronScheduleExpression"],
+                (string) ConfigurationManager.GetSection("Destination"));
         }
 
         private static ILogger CreateLogger()
@@ -72,43 +69,40 @@ namespace UnikMarketing.Integration.Service
             _logger?.Information("Stopped scheduler");
         }
 
-        private async Task<IScheduler> SimonSays(Simon simon)
+        private IScheduler SimonSays(Simon simon)
         {
             var factory = new StdSchedulerFactory();
-            var scheduler = await factory.GetScheduler();
+            var scheduler = factory.GetScheduler().Result;
 
             _logger?.Information("Setting up scheduler");
 
-                try
-                {
-                    //TODO: Proper Cron
-                    await scheduler.ScheduleJob(
-                        JobBuilder
-                            .Create<DynamicJob>()
-                            .UsingJobData(new JobDataMap
-                            {
-                            //    {"action", new Func<Task>(() => SequelToJson.GetJson().Await())}
-                            })
-                            .Build(),
-                        TriggerBuilder.Create()
-                            .WithCronSchedule(simon.CronScheduleExpression, s => s.Build())
-                            .Build()
-                    );
-                }
-                catch (FormatException)
-                {
-                    _logger?.Error(
-                        "Simon \"{Destination}\" was configured with an invalid cron expression (\"{CronScheduleExpression}\") and was skipped",
-                        simon.Destination,
-                        simon.CronScheduleExpression
-                    );
-                }
-            
+            try
+            {
+                scheduler.ScheduleJob(
+                    JobBuilder
+                        .Create<IntegrationJob>()
+                        .UsingJobData(new JobDataMap
+                        {
+                            {"ConnectionString", simon.ConnectionString}
+                        })
+                        .Build(),
+                    TriggerBuilder.Create()
+                        .WithCronSchedule(simon.CronScheduleExpression, s => s.Build())
+                        .Build()
+                ).Wait();
+            }
+            catch (FormatException)
+            {
+                _logger?.Error(
+                    "Simon \"{Destination}\" was configured with an invalid cron expression (\"{CronScheduleExpression}\") and was skipped",
+                    simon.Destination,
+                    simon.CronScheduleExpression
+                );
+            }
 
             _logger?.Information("Finished setting up scheduler");
 
             return scheduler;
         }
-
     }
 }

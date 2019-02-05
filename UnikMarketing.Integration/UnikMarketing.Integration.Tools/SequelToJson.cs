@@ -9,10 +9,8 @@ namespace UnikMarketing.Integration.Tools
 {
     public class SequelToJson
     {
-        private readonly SqlConnection _sqlConnection;
-
         #region Sql
-        private readonly string RentalSql = @"
+        private const string RentalSql = @"
         SELECT 
             us.UdlejningsSagId
             , us.Titel 
@@ -40,21 +38,16 @@ namespace UnikMarketing.Integration.Tools
         le.LejemaalNr = lej.LejemaalNr";
         #endregion
 
-        public SequelToJson(SqlConnection sqlConnection)
+        private static SqlCommand CreateRentalCommand(SqlConnection sqlConnection)
         {
-            _sqlConnection = sqlConnection;
+            return new SqlCommand(RentalSql, sqlConnection);
         }
 
-        private SqlCommand CreateRentalCommand()
-        {
-            return new SqlCommand(RentalSql, _sqlConnection);
-        }
-
-        private ICollection<RentalObjectDto> GetAll()
+        private static ICollection<RentalObjectDto> GetAll(SqlConnection sqlConnection)
         {
             List<RentalObjectDto> result = new List<RentalObjectDto>();
-            _sqlConnection.Open();
-            using (SqlDataReader dataReader = CreateRentalCommand().ExecuteReader())
+            sqlConnection.Open();
+            using (SqlDataReader dataReader = CreateRentalCommand(sqlConnection).ExecuteReader())
             {
                     foreach (IDataRecord dataRecord in dataReader)
                     {
@@ -83,9 +76,10 @@ namespace UnikMarketing.Integration.Tools
             return result;
         }
 
-        public string GetJson()
+        public static string GetJson(string connectionString)
         {
-            return JsonConvert.SerializeObject(GetAll());
+            using (SqlConnection sqlConn = new SqlConnection(connectionString))
+                return JsonConvert.SerializeObject(GetAll(sqlConn));
         }
     }
 }
