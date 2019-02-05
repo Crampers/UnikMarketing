@@ -1,47 +1,63 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using UnikMarketing.Data;
+using UnikMarketing.Data.Request.Commands;
+using UnikMarketing.Data.Request.Queries;
 using UnikMarketing.Domain;
-using UnikMarketing.Domain.Repositories;
 
 namespace UnikMarketing.Business
 {
     public class RequestService : IRequestService
     {
-        private readonly IRequestRepository _requestRepository;
+        private readonly IDataProcessor _dataProcessor;
 
-        public RequestService(IRequestRepository requestRepository)
+        public RequestService(IDataProcessor dataProcessor)
         {
-            _requestRepository = requestRepository;
+            _dataProcessor = dataProcessor;
         }
 
         public Task<ICollection<Request>> GetAll()
         {
-            return _requestRepository.GetAll();
+            return _dataProcessor.Process(new GetRequestsQuery());
         }
 
-        public Task<Request> Get(string id)
+        public async Task<Request> Get(string id)
         {
-            return _requestRepository.Get(id);
+            var requests = await _dataProcessor.Process(new GetRequestsQuery
+            {
+                Ids = { id }
+            });
+
+            return requests.SingleOrDefault();
         }
 
         public Task<Request> Create(Request request)
         {
-            return _requestRepository.Create(request);
+            return _dataProcessor.Process(new CreateRequestCommand(request));
         }
 
         public Task<Request> Update(Request request)
         {
-            return _requestRepository.Update(request);
+            return _dataProcessor.Process(new UpdateRequestCommand(request));
         }
 
         public Task Delete(Request request)
         {
-            return _requestRepository.Delete(request);
+            return Delete(request.Id);
         }
 
         public Task Delete(string id)
         {
-            return _requestRepository.Delete(id);
+            return _dataProcessor.Process(new DeleteRequestCommand(id));
+        }
+
+        public Task<ICollection<Request>> GetByUser(string id)
+        {
+            return _dataProcessor.Process(new GetRequestsQuery
+            {
+                UserIds = { id }
+            });
         }
     }
 }

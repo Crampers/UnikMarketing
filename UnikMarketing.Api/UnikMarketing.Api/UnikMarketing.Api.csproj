@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>i</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UnikMarketing.Business\UnikMarketing.Business.csproj" />
     <ProjectReference Include="..\UnikMarketing.Data.MongoDb\UnikMarketing.Data.MongoDb.csproj" />
+    <ProjectReference Include="..\UnikMarketing.Data\UnikMarketing.Data.csproj" />
     <ProjectReference Include="..\UnikMarketing.Domain\UnikMarketing.Domain.csproj" />
   </ItemGroup>
 

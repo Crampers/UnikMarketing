@@ -1,11 +1,17 @@
 [  
-	{  
-		"id":"5c3c71bf4d4b0b17709a7f3a",
-		"email":"ssstenz@haha.com",
-		"name":"Mathias",
+	{
+		"email": "ssstenz@haha.com",
+		"name": "Mathias",
 		"password":"supersafe",
-		"address":"Someaddress 2",
-		"zipCode":"7100",
-		"criteria":null
+		"address": "Someaddress 2",
+		"zip_code": "7100",
+		"criteria": {
+			"size_from": 0.0,
+			"size_to": 0.0,
+			"price_from": 0.0,
+			"price_to": 0.0,
+			"floor_from": 0,
+			"floor_to": 0
+		}
 	}
 ]
