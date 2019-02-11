@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using Swashbuckle.AspNetCore.Swagger;
 using Unik.Marketing.Api.Business;
 using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.MongoDb.Request.Commands.Handlers;
@@ -34,6 +35,10 @@ namespace Unik.Marketing.Api.Web
         {
             services.AddMvc();
             services.AddAutoMapper();
+            services.AddSwaggerGen(setup =>
+            {
+                setup.SwaggerDoc("v1", new Info { Title = "Unik.Marketing", Version = "v1" });
+            });
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRequestService, RequestService>();
             services.AddScoped<IDataProcessor, DataProcessor>();
@@ -58,6 +63,11 @@ namespace Unik.Marketing.Api.Web
             }
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(setup =>
+            {
+                setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Unik.Marketing v1");
+            });
         }
     }
 }
