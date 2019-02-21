@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Unik.Marketing.Api.Data.MongoDb\Unik.Marketing.Api.Data.MongoDb.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj" />
   </ItemGroup>

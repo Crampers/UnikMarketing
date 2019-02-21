@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Unik.Marketing.Api.Business;
+using Unik.Marketing.Api.Business.Request.Commands;
+using Unik.Marketing.Api.Business.Request.Queries;
 using Unik.Marketing.Api.Domain;
 using Unik.Marketing.Api.Web.Models;
 
@@ -11,12 +15,14 @@ namespace Unik.Marketing.Api.Web.Controllers
     [Route("requests")]
     public class RequestController : Controller
     {
+        private readonly ICommandProcessor _commandProcessor;
+        private readonly IQueryProcessor _queryProcessor;
         private readonly IMapper _mapper;
-        private readonly IRequestService _requestService;
 
-        public RequestController(IRequestService requestService, IMapper mapper)
+        public RequestController(ICommandProcessor commandProcessor, IQueryProcessor queryProcessor, IMapper mapper)
         {
-            _requestService = requestService;
+            _commandProcessor = commandProcessor;
+            _queryProcessor = queryProcessor;
             _mapper = mapper;
         }
 
@@ -24,21 +30,29 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<ICollection<Request>>> GetRequests()
         {
-            return Ok(await _requestService.GetAll());
+            var requests = await _queryProcessor.Process(new GetRequestsQuery());
+
+            return Ok(requests);
         }
 
         //GET /requests/{id} (Get requests with id)
         [HttpGet("{id}")]
         public async Task<ActionResult<Request>> GetRequest(string id)
         {
-            return Ok(await _requestService.Get(id));
+            var requests = await _queryProcessor.Process(new GetRequestsQuery()
+            {
+                Ids = {id}
+            });
+
+            return Ok(requests.FirstOrDefault());
         }
 
         [HttpPost]
         public async Task<ActionResult<Request>> Create([FromBody] RequestDto requestDto)
         {
             var request = _mapper.Map<Request>(requestDto);
-            var createdDto = _mapper.Map<RequestDto>(await _requestService.Create(request));
+            var created = await _commandProcessor.Process(new CreateRequestCommand(request));
+            var createdDto = _mapper.Map<RequestDto>(created);
 
             return CreatedAtAction(
                 "GetRequest",
@@ -50,7 +64,11 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Request>> Update(string id, [FromBody] RequestDto requestDto)
         {
-            var request = await _requestService.Get(id);
+            var requests = await _queryProcessor.Process(new GetRequestsQuery()
+            {
+                Ids = { id }
+            });
+            var request = requests.FirstOrDefault();
 
             if (request == null)
             {
@@ -62,8 +80,9 @@ namespace Unik.Marketing.Api.Web.Controllers
                 return BadRequest();
             }
 
-            var updatedRequest = _mapper.Map<Request>(requestDto);
-            var updatedRequestDto = _mapper.Map<RequestDto>(await _requestService.Update(updatedRequest));
+            var updatingRequest = _mapper.Map<Request>(requestDto);
+            var updatedRequest = await _commandProcessor.Process(new UpdateRequestCommand(updatingRequest));
+            var updatedRequestDto = _mapper.Map<RequestDto>(updatedRequest);
 
             return Ok(updatedRequestDto);
         }
@@ -71,7 +90,11 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Request>> Update(string id)
         {
-            var request = await _requestService.Get(id);
+            var requests = await _queryProcessor.Process(new GetRequestsQuery()
+            {
+                Ids = { id }
+            });
+            var request = requests.FirstOrDefault();
 
             if (request == null)
             {
@@ -83,7 +106,7 @@ namespace Unik.Marketing.Api.Web.Controllers
                 return BadRequest();
             }
 
-            await _requestService.Delete(id);
+            await _commandProcessor.Process(new DeleteRequestCommand(id));
 
             return NoContent();
         }

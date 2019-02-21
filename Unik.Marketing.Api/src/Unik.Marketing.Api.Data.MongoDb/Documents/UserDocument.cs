@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace Unik.Marketing.Api.Data.MongoDb.Documents
 {
-    internal class UserDocument
+    public class UserDocument
     {
         [BsonElement("_id")]
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]

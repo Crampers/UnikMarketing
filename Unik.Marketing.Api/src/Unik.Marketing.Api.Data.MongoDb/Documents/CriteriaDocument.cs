@@ -2,7 +2,7 @@
 
 namespace Unik.Marketing.Api.Data.MongoDb.Documents
 {
-    internal class CriteriaDocument
+    public class CriteriaDocument
     {
         [BsonElement("size_from")] public decimal SizeFrom { get; set; }
 
