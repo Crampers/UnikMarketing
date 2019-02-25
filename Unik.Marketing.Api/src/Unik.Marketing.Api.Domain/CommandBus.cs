@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace Unik.Marketing.Api.Domain
 {
-    public class CommandProcessor : ICommandProcessor
+    public class CommandBus : ICommandBus
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public CommandProcessor(IServiceProvider serviceProvider)
+        public CommandBus(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

@@ -16,13 +16,13 @@ namespace Unik.Marketing.Api.Web.Controllers
     [Route("users")]
     public class UserController : Controller
     {
-        private readonly ICommandProcessor _commandProcessor;
+        private readonly ICommandBus _commandBus;
         private readonly IQueryProcessor _queryProcessor;
         private readonly IMapper _mapper;
 
-        public UserController(ICommandProcessor commandProcessor, IQueryProcessor queryProcessor, IMapper mapper)
+        public UserController(ICommandBus commandBus, IQueryProcessor queryProcessor, IMapper mapper)
         {
-            _commandProcessor = commandProcessor;
+            _commandBus = commandBus;
             _queryProcessor = queryProcessor;
             _mapper = mapper;
         }
@@ -75,7 +75,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            var createdUser = await _commandProcessor.Process(new CreateUserCommand(user));
+            var createdUser = await _commandBus.Process(new CreateUserCommand(user));
             var createdUserDto = _mapper.Map<UserDto>(createdUser);
 
             return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
@@ -102,7 +102,7 @@ namespace Unik.Marketing.Api.Web.Controllers
             }
 
             var updatingUser = _mapper.Map<User>(userDto);
-            var updatedUser = _commandProcessor.Process(new UpdateUserCommand(updatingUser));
+            var updatedUser = _commandBus.Process(new UpdateUserCommand(updatingUser));
             var updatedUserDto = _mapper.Map<UserDto>(updatedUser);
 
             return Ok(updatedUserDto);
@@ -129,7 +129,7 @@ namespace Unik.Marketing.Api.Web.Controllers
                 return BadRequest();
             }
 
-            await _commandProcessor.Process(new DeleteUserCommand(id));
+            await _commandBus.Process(new DeleteUserCommand(id));
 
             return NoContent();
         }

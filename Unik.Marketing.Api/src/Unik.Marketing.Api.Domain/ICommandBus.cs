@@ -2,7 +2,7 @@
 
 namespace Unik.Marketing.Api.Domain
 {
-    public interface ICommandProcessor
+    public interface ICommandBus
     {
         Task Process(ICommand command);
 

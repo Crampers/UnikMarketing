@@ -16,13 +16,13 @@ namespace Unik.Marketing.Api.Web.Controllers
     [Route("requests")]
     public class RequestController : Controller
     {
-        private readonly ICommandProcessor _commandProcessor;
+        private readonly ICommandBus _commandBus;
         private readonly IQueryProcessor _queryProcessor;
         private readonly IMapper _mapper;
 
-        public RequestController(ICommandProcessor commandProcessor, IQueryProcessor queryProcessor, IMapper mapper)
+        public RequestController(ICommandBus commandBus, IQueryProcessor queryProcessor, IMapper mapper)
         {
-            _commandProcessor = commandProcessor;
+            _commandBus = commandBus;
             _queryProcessor = queryProcessor;
             _mapper = mapper;
         }
@@ -52,7 +52,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         public async Task<ActionResult<Request>> Create([FromBody] RequestDto requestDto)
         {
             var request = _mapper.Map<Request>(requestDto);
-            var created = await _commandProcessor.Process(new CreateRequestCommand(request));
+            var created = await _commandBus.Process(new CreateRequestCommand(request));
             var createdDto = _mapper.Map<RequestDto>(created);
 
             return CreatedAtAction(
@@ -82,7 +82,7 @@ namespace Unik.Marketing.Api.Web.Controllers
             }
 
             var updatingRequest = _mapper.Map<Request>(requestDto);
-            var updatedRequest = await _commandProcessor.Process(new UpdateRequestCommand(updatingRequest));
+            var updatedRequest = await _commandBus.Process(new UpdateRequestCommand(updatingRequest));
             var updatedRequestDto = _mapper.Map<RequestDto>(updatedRequest);
 
             return Ok(updatedRequestDto);
@@ -107,7 +107,7 @@ namespace Unik.Marketing.Api.Web.Controllers
                 return BadRequest();
             }
 
-            await _commandProcessor.Process(new DeleteRequestCommand(id));
+            await _commandBus.Process(new DeleteRequestCommand(id));
 
             return NoContent();
         }

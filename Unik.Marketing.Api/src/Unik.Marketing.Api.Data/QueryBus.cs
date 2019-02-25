@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace Unik.Marketing.Api.Data
 {
-    public class QueryProcessor : IQueryProcessor
+    public class QueryBus : IQueryProcessor
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public QueryProcessor(IServiceProvider serviceProvider)
+        public QueryBus(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

@@ -40,8 +40,8 @@ namespace Unik.Marketing.Api.Web
             {
                 setup.SwaggerDoc("v1", new Info { Title = "Unik.Marketing", Version = "v1" });
             });
-            services.AddScoped<ICommandProcessor, CommandProcessor>();
-            services.AddScoped<IQueryProcessor, QueryProcessor>();
+            services.AddScoped<ICommandBus, CommandBus>();
+            services.AddScoped<IQueryProcessor, QueryBus>();
             services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Data.Request.Request>>, GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<Data.User.User>>, GetUsersQueryHandler>();
             services.AddTransient<ICommandHandler<CreateRequestCommand, Request>, CreateRequestCommandHandler>();
