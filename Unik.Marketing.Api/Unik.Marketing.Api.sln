@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data.Mon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data", "src\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj", "{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Business", "src\Unik.Marketing.Api.Business\Unik.Marketing.Api.Business.csproj", "{0C2630E2-CA4A-4100-B961-B543326734E7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

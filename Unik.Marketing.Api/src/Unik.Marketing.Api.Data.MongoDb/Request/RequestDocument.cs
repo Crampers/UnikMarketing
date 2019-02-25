@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace Unik.Marketing.Api.Data.MongoDb.Documents
+namespace Unik.Marketing.Api.Data.MongoDb.Request
 {
     public class RequestDocument
     {

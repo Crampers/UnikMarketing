@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Unik.Marketing.Api.Domain
+namespace Unik.Marketing.Api.Domain.User
 {
     public class Location
     {

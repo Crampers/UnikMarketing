@@ -6,16 +6,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Swagger;
-using Unik.Marketing.Api.Business;
-using Unik.Marketing.Api.Business.Request.Commands;
-using Unik.Marketing.Api.Business.Request.Commands.Handlers;
-using Unik.Marketing.Api.Business.Request.Queries;
-using Unik.Marketing.Api.Business.Request.Queries.Handlers;
-using Unik.Marketing.Api.Business.User.Commands;
-using Unik.Marketing.Api.Business.User.Commands.Handlers;
-using Unik.Marketing.Api.Business.User.Queries;
-using Unik.Marketing.Api.Business.User.Queries.Handlers;
+using Unik.Marketing.Api.Data;
+using Unik.Marketing.Api.Data.MongoDb.Request.Queries.Handlers;
+using Unik.Marketing.Api.Data.MongoDb.User.Queries.Handlers;
+using Unik.Marketing.Api.Data.Request.Queries;
+using Unik.Marketing.Api.Data.User.Queries;
 using Unik.Marketing.Api.Domain;
+using Unik.Marketing.Api.Domain.Request;
+using Unik.Marketing.Api.Domain.Request.Commands;
+using Unik.Marketing.Api.Domain.Request.Commands.Handlers;
+using Unik.Marketing.Api.Domain.User;
+using Unik.Marketing.Api.Domain.User.Commands;
+using Unik.Marketing.Api.Domain.User.Commands.Handlers;
 
 namespace Unik.Marketing.Api.Web
 {
@@ -38,10 +40,10 @@ namespace Unik.Marketing.Api.Web
             {
                 setup.SwaggerDoc("v1", new Info { Title = "Unik.Marketing", Version = "v1" });
             });
-            services.AddScoped<ICommandProcessor, Processor>();
-            services.AddScoped<IQueryProcessor, Processor>();
-            services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Request>>, GetRequestsQueryHandler>();
-            services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<User>>, GetUsersQueryHandler>();
+            services.AddScoped<ICommandProcessor, CommandProcessor>();
+            services.AddScoped<IQueryProcessor, QueryProcessor>();
+            services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Data.Request.Request>>, GetRequestsQueryHandler>();
+            services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<Data.User.User>>, GetUsersQueryHandler>();
             services.AddTransient<ICommandHandler<CreateRequestCommand, Request>, CreateRequestCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateRequestCommand, Request>, UpdateRequestCommandHandler>();
             services.AddTransient<ICommandHandler<DeleteRequestCommand>, DeleteRequestCommandHandler>();

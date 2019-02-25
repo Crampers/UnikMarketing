@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Unik.Marketing.Api.Data.MongoDb.Documents
+namespace Unik.Marketing.Api.Data.MongoDb.User
 {
     public class CriteriaDocument
     {

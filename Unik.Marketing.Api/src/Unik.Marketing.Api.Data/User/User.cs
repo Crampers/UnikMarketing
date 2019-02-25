@@ -1,4 +1,4 @@
-﻿namespace Unik.Marketing.Api.Domain
+﻿namespace Unik.Marketing.Api.Data.User
 {
     public class User
     {
