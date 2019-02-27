@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Unik.Marketing.Api.Domain.Events.Persistence.InMemory
+namespace Unik.Marketing.Api.Business.EventStore.InMemory
 {
     public class InMemoryEventPersistence : IEventPersistence
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Unik.Marketing.Api.Domain.Events.Persistence
+namespace Unik.Marketing.Api.Business.EventStore
 {
     public interface IEventPersistence
     {

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Domain.Events.csproj" />
+    <ProjectReference Include="..\..\Unik.Marketing.Api.Business.Domain\Unik.Marketing.Api.Business.Domain.csproj" />
   </ItemGroup>
 
 </Project>

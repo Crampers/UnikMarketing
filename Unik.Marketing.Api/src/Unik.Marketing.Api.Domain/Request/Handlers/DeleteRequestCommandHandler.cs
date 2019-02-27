@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Unik.Marketing.Api.Domain.Request.Commands.Handlers
+namespace Unik.Marketing.Api.Business.Request.Handlers
 {
     public class DeleteRequestCommandHandler : ICommandHandler<DeleteRequestCommand>
     {

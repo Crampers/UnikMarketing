@@ -1,4 +1,4 @@
-﻿namespace Unik.Marketing.Api.Domain.Events
+﻿namespace Unik.Marketing.Api.Business.EventStore
 {
     public interface IEvent
     {

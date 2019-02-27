@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Unik.Marketing.Api.Domain.Events.Persistence;
 
-namespace Unik.Marketing.Api.Domain.Events
+namespace Unik.Marketing.Api.Business.EventStore
 {
     public class EventStore : IEventStore
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Unik.Marketing.Api.Domain
+namespace Unik.Marketing.Api.Business
 {
     public interface ICommandHandler<in TCommand>
         where TCommand : ICommand

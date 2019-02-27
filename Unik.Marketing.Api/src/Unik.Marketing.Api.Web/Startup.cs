@@ -6,21 +6,21 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Swagger;
+using Unik.Marketing.Api.Business;
+using Unik.Marketing.Api.Business.Domain;
+using Unik.Marketing.Api.Business.Domain.Request;
+using Unik.Marketing.Api.Business.Domain.User;
+using Unik.Marketing.Api.Business.EventStore;
+using Unik.Marketing.Api.Business.EventStore.InMemory;
+using Unik.Marketing.Api.Business.Request;
+using Unik.Marketing.Api.Business.Request.Handlers;
+using Unik.Marketing.Api.Business.User;
+using Unik.Marketing.Api.Business.User.Handlers;
 using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.MongoDb.Request.Queries.Handlers;
 using Unik.Marketing.Api.Data.MongoDb.User.Queries.Handlers;
 using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Data.User.Queries;
-using Unik.Marketing.Api.Domain;
-using Unik.Marketing.Api.Domain.Events;
-using Unik.Marketing.Api.Domain.Events.Persistence;
-using Unik.Marketing.Api.Domain.Events.Persistence.InMemory;
-using Unik.Marketing.Api.Domain.Request;
-using Unik.Marketing.Api.Domain.Request.Commands;
-using Unik.Marketing.Api.Domain.Request.Commands.Handlers;
-using Unik.Marketing.Api.Domain.User;
-using Unik.Marketing.Api.Domain.User.Commands;
-using Unik.Marketing.Api.Domain.User.Commands.Handlers;
 
 namespace Unik.Marketing.Api.Web
 {

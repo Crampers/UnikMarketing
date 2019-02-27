@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Domain.Events.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Business.EventStore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Unik.Marketing.Api.Domain
+namespace Unik.Marketing.Api.Business.Domain
 {
     public interface IRepository<TAggregate>
         where TAggregate : AggregateRoot

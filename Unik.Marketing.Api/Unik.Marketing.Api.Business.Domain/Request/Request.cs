@@ -1,4 +1,4 @@
-﻿namespace Unik.Marketing.Api.Domain.Request
+﻿namespace Unik.Marketing.Api.Business.Domain.Request
 {
     public class Request
     {

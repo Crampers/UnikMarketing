@@ -29,11 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Unik.Marketing.Api.Domain.Events.Persistence.InMemory\Unik.Marketing.Api.Domain.Events.InMemory.csproj" />
-    <ProjectReference Include="..\..\Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Domain.Events.csproj" />
+    <ProjectReference Include="..\..\Unik.Marketing.Api.Domain.Events.Persistence.InMemory\Unik.Marketing.Api.Business.EventStore.InMemory.csproj" />
+    <ProjectReference Include="..\..\Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Business.EventStore.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Data.MongoDb\Unik.Marketing.Api.Data.MongoDb.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj" />
-    <ProjectReference Include="..\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Business.csproj" />
   </ItemGroup>
 
 </Project>

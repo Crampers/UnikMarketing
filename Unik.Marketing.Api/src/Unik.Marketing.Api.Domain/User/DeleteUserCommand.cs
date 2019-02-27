@@ -1,4 +1,4 @@
-﻿namespace Unik.Marketing.Api.Domain.User.Commands
+﻿namespace Unik.Marketing.Api.Business.User
 {
     public class DeleteUserCommand : ICommand
     {

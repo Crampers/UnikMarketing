@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Unik.Marketing.Api.Domain.Events;
+using Unik.Marketing.Api.Business.EventStore;
 
-namespace Unik.Marketing.Api.Domain
+namespace Unik.Marketing.Api.Business.Domain
 {
     public class Repository<TAggregate> : IRepository<TAggregate> 
         where TAggregate : AggregateRoot, new()

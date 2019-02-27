@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Unik.Marketing.Api.Domain
+namespace Unik.Marketing.Api.Business
 {
     public class CommandBus : ICommandBus
     {
