@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Domain.Events.csproj" />
+  </ItemGroup>
+
 </Project>

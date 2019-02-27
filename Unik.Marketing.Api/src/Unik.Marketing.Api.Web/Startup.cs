@@ -12,6 +12,9 @@ using Unik.Marketing.Api.Data.MongoDb.User.Queries.Handlers;
 using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Data.User.Queries;
 using Unik.Marketing.Api.Domain;
+using Unik.Marketing.Api.Domain.Events;
+using Unik.Marketing.Api.Domain.Events.Persistence;
+using Unik.Marketing.Api.Domain.Events.Persistence.InMemory;
 using Unik.Marketing.Api.Domain.Request;
 using Unik.Marketing.Api.Domain.Request.Commands;
 using Unik.Marketing.Api.Domain.Request.Commands.Handlers;
@@ -52,6 +55,9 @@ namespace Unik.Marketing.Api.Web
             services.AddTransient<ICommandHandler<DeleteUserCommand>, DeleteUserCommandHandler>();
             services.AddScoped<IMongoClient>(provider => new MongoClient(_configuration.GetConnectionString("UnikMarketing")));
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
+            services.AddSingleton<IEventStore, EventStore>();
+            services.AddSingleton<IEventPersistence, InMemoryEventPersistence>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

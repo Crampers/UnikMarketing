@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data.Mon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data", "src\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj", "{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Domain.Events", "Unik.Marketing.Api.Domain.Events\Unik.Marketing.Api.Domain.Events.csproj", "{D7ED14C6-AD99-4F49-93FF-87B138852E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Domain.Events.InMemory", "Unik.Marketing.Api.Domain.Events.Persistence.InMemory\Unik.Marketing.Api.Domain.Events.InMemory.csproj", "{39EBADE0-76BA-4B81-973D-00588EE746F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
