@@ -76,7 +76,7 @@ namespace Unik.Marketing.Integration.Tools
             return result;
         }
 
-        public static string GetJson(string connectionString)
+        public static string GetSerializedJson(string connectionString)
         {
             using (SqlConnection sqlConn = new SqlConnection(connectionString))
                 return JsonConvert.SerializeObject(GetAll(sqlConn));

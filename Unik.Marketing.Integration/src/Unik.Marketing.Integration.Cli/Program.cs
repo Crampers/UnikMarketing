@@ -17,7 +17,7 @@ namespace Unik.Marketing.Integration.Cli
                 string connectionString = args[0];
                 string fileName = args[1];
 
-                var jsonResult = SequelToJson.GetJson(connectionString);
+                var jsonResult = SequelToJson.GetSerializedJson(connectionString);
                 File.WriteAllText(fileName, jsonResult);
             }
         }
