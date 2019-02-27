@@ -31,7 +31,7 @@ namespace Unik.Marketing.Integration.Service
                 if (string.IsNullOrWhiteSpace(configurationPath))
                     _logger?.Fatal("Configuration file not found at \"{ConfigurationPath}\"", configurationPath);
 
-                _cron = SimonSays(ReadSimon());
+                _cron = GetScheduler(ReadSetupConfiguration());
             }
             catch (Exception e)
             {
@@ -40,9 +40,9 @@ namespace Unik.Marketing.Integration.Service
             }
         }
 
-        private Simon ReadSimon()
+        private SetupConfiguration ReadSetupConfiguration()
         {
-            return new Simon(
+            return new SetupConfiguration(
                 ConfigurationManager.ConnectionStrings["UnikBoligCon"].ConnectionString,
                 ConfigurationManager.AppSettings["CronScheduleExpression"],
                 (string) ConfigurationManager.GetSection("Destination"));
@@ -69,7 +69,7 @@ namespace Unik.Marketing.Integration.Service
             _logger?.Information("Stopped scheduler");
         }
 
-        private IScheduler SimonSays(Simon simon)
+        private IScheduler GetScheduler(SetupConfiguration setupConfiguration)
         {
             var factory = new StdSchedulerFactory();
             var scheduler = factory.GetScheduler().Result;
@@ -83,20 +83,20 @@ namespace Unik.Marketing.Integration.Service
                         .Create<IntegrationJob>()
                         .UsingJobData(new JobDataMap
                         {
-                            {"ConnectionString", simon.ConnectionString}
+                            {"ConnectionString", setupConfiguration.ConnectionString}
                         })
                         .Build(),
                     TriggerBuilder.Create()
-                        .WithCronSchedule(simon.CronScheduleExpression, s => s.Build())
+                        .WithCronSchedule(setupConfiguration.CronScheduleExpression, s => s.Build())
                         .Build()
                 ).Wait();
             }
             catch (FormatException)
             {
                 _logger?.Error(
-                    "Simon \"{Destination}\" was configured with an invalid cron expression (\"{CronScheduleExpression}\") and was skipped",
-                    simon.Destination,
-                    simon.CronScheduleExpression
+                    "SetupConfiguration \"{Destination}\" was configured with an invalid cron expression (\"{CronScheduleExpression}\") and was skipped",
+                    setupConfiguration.Destination,
+                    setupConfiguration.CronScheduleExpression
                 );
             }
 

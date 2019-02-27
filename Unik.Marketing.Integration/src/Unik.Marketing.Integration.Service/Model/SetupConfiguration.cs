@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Serilog;
-
-namespace Unik.Marketing.Integration.Service.Model
+﻿namespace Unik.Marketing.Integration.Service.Model
 {
-    public class Simon
+    public class SetupConfiguration
     {
         public readonly string ConnectionString;
         public readonly string CronScheduleExpression;
         public readonly string Destination;
 
-        public Simon(string connectionString, string cronScheduleExpression, string destination)
+        public SetupConfiguration(string connectionString, string cronScheduleExpression, string destination)
         {
             ConnectionString = connectionString;
             CronScheduleExpression = cronScheduleExpression;
