@@ -7,7 +7,7 @@ namespace Unik.Marketing.Api.Business.Domain
     public abstract class AggregateRoot
     {
         private readonly List<IEvent> _changes = new List<IEvent>();
-
+        
         public abstract Guid Id { get; }
 
         public int Version { get; private set; }

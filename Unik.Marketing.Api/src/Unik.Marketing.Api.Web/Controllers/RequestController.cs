@@ -51,8 +51,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<Request>> Create([FromBody] RequestDto requestDto)
         {
-            var request = _mapper.Map<Request>(requestDto);
-            var created = await _commandBus.Process(new CreateRequestCommand(request));
+            var created = await _commandBus.Process(new CreateRequestCommand(requestDto.Note, requestDto.UserId));
             var createdDto = _mapper.Map<RequestDto>(created);
 
             return CreatedAtAction(
@@ -80,9 +79,8 @@ namespace Unik.Marketing.Api.Web.Controllers
             {
                 return BadRequest();
             }
-
-            var updatingRequest = _mapper.Map<Request>(requestDto);
-            var updatedRequest = await _commandBus.Process(new UpdateRequestCommand(updatingRequest));
+            
+            var updatedRequest = await _commandBus.Process(new UpdateNoteCommand(id, requestDto.Note));
             var updatedRequestDto = _mapper.Map<RequestDto>(updatedRequest);
 
             return Ok(updatedRequestDto);

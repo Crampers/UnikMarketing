@@ -12,16 +12,14 @@ namespace Unik.Marketing.Api.Business
         {
             _serviceProvider = serviceProvider;
         }
-
-        [DebuggerStepThrough]
+        
         public Task Process(ICommand command)
         {
             var type = typeof(ICommandHandler<>).MakeGenericType(command.GetType());
 
             return Handle(type, command);
         }
-
-        [DebuggerStepThrough]
+        
         public Task<TResult> Process<TResult>(ICommand<TResult> command)
         {
             var type = typeof(ICommandHandler<,>).MakeGenericType(command.GetType(), typeof(TResult));

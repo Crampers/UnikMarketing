@@ -2,11 +2,14 @@
 {
     public class CreateRequestCommand : ICommand<Domain.Request.Request>
     {
-        public CreateRequestCommand(Domain.Request.Request request)
+        public CreateRequestCommand(string note, string userId)
         {
-            Request = request;
+            Note = note;
+            UserId = userId;
         }
 
-        public Domain.Request.Request Request { get; set; }
+        public string Note { get; set; }
+
+        public string UserId { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace Unik.Marketing.Api.Web
             services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Data.Request.Request>>, GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<Data.User.User>>, GetUsersQueryHandler>();
             services.AddTransient<ICommandHandler<CreateRequestCommand, Request>, CreateRequestCommandHandler>();
-            services.AddTransient<ICommandHandler<UpdateRequestCommand, Request>, UpdateRequestCommandHandler>();
+            services.AddTransient<ICommandHandler<UpdateNoteCommand, Request>, UpdateNoteCommandHandler>();
             services.AddTransient<ICommandHandler<DeleteRequestCommand>, DeleteRequestCommandHandler>();
             services.AddTransient<ICommandHandler<CreateUserCommand, User>, CreateUserCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateUserCommand, User>, UpdateUserCommandHandler>();
