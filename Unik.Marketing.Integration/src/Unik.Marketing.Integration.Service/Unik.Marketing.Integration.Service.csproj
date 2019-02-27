@@ -72,6 +72,7 @@
       <DependentUpon>ServiceInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\IntegrationJob.cs" />
+    <Compile Include="Model\MarketingCase.cs" />
     <Compile Include="Model\SetupConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
