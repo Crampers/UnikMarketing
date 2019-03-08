@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Unik.Marketing.Api.Business.EventStore;
 
 namespace Unik.Marketing.Api.Business.Domain
@@ -45,7 +46,19 @@ namespace Unik.Marketing.Api.Business.Domain
         
         private void ApplyChange(IEvent @event, bool isNew)
         {
-            ((dynamic)this).Apply(@event);
+            GetType()
+                .GetMethod(
+                    "Apply",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    Type.DefaultBinder,
+                    CallingConventions.HasThis,
+                    new[] { @event.GetType() },
+                    new ParameterModifier[0]
+                )
+                ?.Invoke(
+                    this, 
+                    new object[] {@event}
+                );
 
             Version++;
 
