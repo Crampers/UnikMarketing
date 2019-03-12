@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Unik.Marketing.Api.Caching.Configuration;
+using Unik.Marketing.Api.Caching.InMemory.Configuration;
 using Unik.Marketing.Api.Data.Configuration;
 using Unik.Marketing.Api.Data.MongoDb.Configuration;
 using Unik.Marketing.Api.Domain.Configuration;
@@ -33,6 +35,9 @@ namespace Unik.Marketing.Api.Web
             });
 
             services.AddAggregateRepositories();
+
+            services.AddInMemoryCache();
+            services.Configure<CacheOptions>(_configuration.GetSection("Caching"));
 
             services.AddCommandBus();
             services.AddCommandHandlers();
