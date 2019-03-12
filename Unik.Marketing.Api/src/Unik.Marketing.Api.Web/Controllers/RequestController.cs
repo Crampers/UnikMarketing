@@ -74,22 +74,6 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Request>> Update(string id)
         {
-            var requests = await _queryProcessor.Process(new GetRequestsQuery()
-            {
-                Ids = { id }
-            });
-            var request = requests.FirstOrDefault();
-
-            if (request == null)
-            {
-                return NotFound();
-            }
-
-            if (id != request.Id)
-            {
-                return BadRequest();
-            }
-
             await _commandBus.Process(new DeleteRequestCommand(id));
 
             return NoContent();
