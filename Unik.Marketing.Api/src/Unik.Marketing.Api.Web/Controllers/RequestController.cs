@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Unik.Marketing.Api.Business;
-using Unik.Marketing.Api.Business.Domain.Request;
-using Unik.Marketing.Api.Business.Request;
 using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.Request.Queries;
+using Unik.Marketing.Api.Domain;
+using Unik.Marketing.Api.Domain.Request;
+using Unik.Marketing.Api.Domain.Request.Commands;
 using Unik.Marketing.Api.Web.Models;
 using Unik.Marketing.Api.Web.Models.Request;
 

@@ -5,17 +5,15 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Web", "src\Unik.Marketing.Api.Web\Unik.Marketing.Api.Web.csproj", "{ED219154-B953-4A82-976A-2119C5F85569}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Business", "src\Unik.Marketing.Api.Business\Unik.Marketing.Api.Business.csproj", "{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data.MongoDb", "src\Unik.Marketing.Api.Data.MongoDb\Unik.Marketing.Api.Data.MongoDb.csproj", "{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data", "src\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj", "{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Business.EventStore", "src\Unik.Marketing.Api.Business.EventStore\Unik.Marketing.Api.Business.EventStore.csproj", "{D7ED14C6-AD99-4F49-93FF-87B138852E7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain.EventStore", "src\Unik.Marketing.Api.Domain.EventStore\Unik.Marketing.Api.Domain.EventStore.csproj", "{D7ED14C6-AD99-4F49-93FF-87B138852E7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Business.EventStore.InMemory", "src\Unik.Marketing.Api.Business.EventStore.InMemory\Unik.Marketing.Api.Business.EventStore.InMemory.csproj", "{39EBADE0-76BA-4B81-973D-00588EE746F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain.EventStore.InMemory", "src\Unik.Marketing.Api.Domain.EventStore.InMemory\Unik.Marketing.Api.Domain.EventStore.InMemory.csproj", "{39EBADE0-76BA-4B81-973D-00588EE746F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Business.Domain", "src\Unik.Marketing.Api.Business.Domain\Unik.Marketing.Api.Business.Domain.csproj", "{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain", "src\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj", "{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{ED219154-B953-4A82-976A-2119C5F85569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED219154-B953-4A82-976A-2119C5F85569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED219154-B953-4A82-976A-2119C5F85569}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}.Release|Any CPU.ActiveCfg = Release|Any CPU

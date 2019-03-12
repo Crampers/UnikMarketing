@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Unik.Marketing.Api.Business.Domain.Request;
-using Unik.Marketing.Api.Business.Domain.User;
+using Unik.Marketing.Api.Domain.Request;
+using Unik.Marketing.Api.Domain.User;
 using Unik.Marketing.Api.Web.Models;
 using Unik.Marketing.Api.Web.Models.Request;
 

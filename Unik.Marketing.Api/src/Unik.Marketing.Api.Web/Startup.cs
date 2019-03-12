@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
-using Unik.Marketing.Api.Business.Domain.Configuration;
-using Unik.Marketing.Api.Business.EventStore.Configuration;
-using Unik.Marketing.Api.Business.EventStore.InMemory.Configuration;
-using Unik.Marketing.Api.Business.Extensions;
 using Unik.Marketing.Api.Data.Configuration;
 using Unik.Marketing.Api.Data.MongoDb.Configuration;
+using Unik.Marketing.Api.Domain.Configuration;
+using Unik.Marketing.Api.Domain.EventStore.Configuration;
+using Unik.Marketing.Api.Domain.EventStore.InMemory.Configuration;
 
 namespace Unik.Marketing.Api.Web
 {

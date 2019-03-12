@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Unik.Marketing.Api.Business;
-using Unik.Marketing.Api.Business.Domain.User;
-using Unik.Marketing.Api.Business.User;
 using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Data.User.Queries;
+using Unik.Marketing.Api.Domain;
+using Unik.Marketing.Api.Domain.User;
+using Unik.Marketing.Api.Domain.User.Commands;
 using Unik.Marketing.Api.Web.Models;
 using Unik.Marketing.Api.Web.Models.Request;
 
