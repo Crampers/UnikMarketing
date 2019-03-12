@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain", "src\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj", "{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Caching", "Unik.Marketing.Api.Caching\Unik.Marketing.Api.Caching.csproj", "{3543AD2A-A026-4B0D-B806-78C7BB902194}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Caching", "src\Unik.Marketing.Api.Caching\Unik.Marketing.Api.Caching.csproj", "{3543AD2A-A026-4B0D-B806-78C7BB902194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Caching.InMemory", "Unik.Marketing.Api.Caching.InMemory\Unik.Marketing.Api.Caching.InMemory.csproj", "{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Caching.InMemory", "src\Unik.Marketing.Api.Caching.InMemory\Unik.Marketing.Api.Caching.InMemory.csproj", "{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
