@@ -31,6 +31,8 @@ namespace Unik.Marketing.Api.Business.Domain.Request
         private void Apply(RequestCreatedEvent @event)
         {
             _id = @event.Id;
+            Note = @event.Note;
+            UserId = @event.UserId;
         }
 
         private void Apply(UpdateNoteEvent @event)
