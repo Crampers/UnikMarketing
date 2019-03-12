@@ -1,4 +1,4 @@
-﻿namespace Unik.Marketing.Api.Web.Models
+﻿namespace Unik.Marketing.Api.Web.Models.Request
 {
     public class RequestDto
     {

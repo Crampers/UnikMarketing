@@ -10,6 +10,7 @@ using Unik.Marketing.Api.Business.Request;
 using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Web.Models;
+using Unik.Marketing.Api.Web.Models.Request;
 
 namespace Unik.Marketing.Api.Web.Controllers
 {
@@ -49,9 +50,9 @@ namespace Unik.Marketing.Api.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Request>> Create([FromBody] RequestDto requestDto)
+        public async Task<ActionResult<Request>> Create([FromBody] CreateRequestDto dto)
         {
-            var created = await _commandBus.Process(new CreateRequestCommand(requestDto.Note, requestDto.UserId));
+            var created = await _commandBus.Process(new CreateRequestCommand(dto.Note, dto.UserId));
             var createdDto = _mapper.Map<RequestDto>(created);
 
             return CreatedAtAction(

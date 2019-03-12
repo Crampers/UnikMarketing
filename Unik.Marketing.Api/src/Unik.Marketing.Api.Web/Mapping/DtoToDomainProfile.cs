@@ -2,6 +2,7 @@
 using Unik.Marketing.Api.Business.Domain.Request;
 using Unik.Marketing.Api.Business.Domain.User;
 using Unik.Marketing.Api.Web.Models;
+using Unik.Marketing.Api.Web.Models.Request;
 
 namespace Unik.Marketing.Api.Web.Mapping
 {

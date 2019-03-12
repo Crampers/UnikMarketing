@@ -10,6 +10,7 @@ using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Data.User.Queries;
 using Unik.Marketing.Api.Web.Models;
+using Unik.Marketing.Api.Web.Models.Request;
 
 namespace Unik.Marketing.Api.Web.Controllers
 {
