@@ -9,7 +9,6 @@ namespace Unik.Marketing.Api.Domain.Request
 
         public Request()
         {
-            
         }
 
         public Request(string note, string userId)
@@ -17,16 +16,16 @@ namespace Unik.Marketing.Api.Domain.Request
             ApplyChange(new RequestCreatedEvent(Guid.NewGuid(), note, userId));
         }
 
-        public void UpdateNote(string note)
-        {
-            ApplyChange(new UpdateNoteEvent(note));
-        }
-
         public string Note { get; private set; }
 
         public string UserId { get; private set; }
 
         public override Guid Id => _id;
+
+        public void UpdateNote(string note)
+        {
+            ApplyChange(new UpdateNoteEvent(note));
+        }
 
         private void Apply(RequestCreatedEvent @event)
         {

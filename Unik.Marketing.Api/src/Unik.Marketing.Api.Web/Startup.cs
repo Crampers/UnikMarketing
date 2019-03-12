@@ -25,18 +25,18 @@ namespace Unik.Marketing.Api.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();   
+            services.AddMvc();
             services.AddAutoMapper();
             services.AddSwaggerGen(setup =>
             {
-                setup.SwaggerDoc("v1", new Info { Title = "Unik.Marketing", Version = "v1" });
+                setup.SwaggerDoc("v1", new Info {Title = "Unik.Marketing", Version = "v1"});
             });
-            
+
             services.AddAggregateRepositories();
-            
+
             services.AddCommandBus();
             services.AddCommandHandlers();
-            
+
             services.AddQueryBus();
             services.AddMongoDbQueryHandlers();
             services.Configure<MongoDbOptions>(_configuration.GetSection("MongoDb"));
@@ -55,10 +55,7 @@ namespace Unik.Marketing.Api.Web
 
             app.UseMvc();
             app.UseSwagger();
-            app.UseSwaggerUI(setup =>
-            {
-                setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Unik.Marketing v1");
-            });
+            app.UseSwaggerUI(setup => { setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Unik.Marketing v1"); });
         }
     }
 }

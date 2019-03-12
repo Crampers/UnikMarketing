@@ -24,8 +24,8 @@ namespace Unik.Marketing.Api.Domain.EventStore.InMemory
         public Task<IEvent[]> Load(Guid id)
         {
             return Task.FromResult(
-                _storage.TryGetValue(id, out var events) 
-                    ? events.ToArray() 
+                _storage.TryGetValue(id, out var events)
+                    ? events.ToArray()
                     : null
             );
         }

@@ -8,7 +8,7 @@ namespace Unik.Marketing.Api.Domain
     public abstract class AggregateRoot
     {
         private readonly List<IEvent> _changes = new List<IEvent>();
-        
+
         public abstract Guid Id { get; }
 
         public int Version { get; private set; }
@@ -43,7 +43,7 @@ namespace Unik.Marketing.Api.Domain
         {
             ApplyChange(@event, true);
         }
-        
+
         private void ApplyChange(IEvent @event, bool isNew)
         {
             GetType()
@@ -52,11 +52,11 @@ namespace Unik.Marketing.Api.Domain
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                     Type.DefaultBinder,
                     CallingConventions.HasThis,
-                    new[] { @event.GetType() },
+                    new[] {@event.GetType()},
                     new ParameterModifier[0]
                 )
                 ?.Invoke(
-                    this, 
+                    this,
                     new object[] {@event}
                 );
 

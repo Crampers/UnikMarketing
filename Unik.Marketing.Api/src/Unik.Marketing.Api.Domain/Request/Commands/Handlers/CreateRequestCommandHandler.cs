@@ -2,18 +2,18 @@
 
 namespace Unik.Marketing.Api.Domain.Request.Commands.Handlers
 {
-    public class CreateRequestCommandHandler : ICommandHandler<CreateRequestCommand, Domain.Request.Request>
+    public class CreateRequestCommandHandler : ICommandHandler<CreateRequestCommand, Request>
     {
-        private readonly IRepository<Domain.Request.Request> _repository;
+        private readonly IRepository<Request> _repository;
 
-        public CreateRequestCommandHandler(IRepository<Domain.Request.Request> repository)
+        public CreateRequestCommandHandler(IRepository<Request> repository)
         {
             _repository = repository;
         }
 
-        public async Task<Domain.Request.Request> Handle(CreateRequestCommand command)
+        public async Task<Request> Handle(CreateRequestCommand command)
         {
-            var request = new Domain.Request.Request(command.Note, command.UserId);
+            var request = new Request(command.Note, command.UserId);
 
             await _repository.Save(request);
 

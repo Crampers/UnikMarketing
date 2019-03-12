@@ -4,7 +4,7 @@ using Unik.Marketing.Api.Domain.EventStore;
 
 namespace Unik.Marketing.Api.Domain
 {
-    public class Repository<TAggregate> : IRepository<TAggregate> 
+    public class Repository<TAggregate> : IRepository<TAggregate>
         where TAggregate : AggregateRoot, new()
     {
         private readonly IEventStore _eventStore;

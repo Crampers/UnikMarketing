@@ -18,8 +18,8 @@ namespace Unik.Marketing.Api.Web.Controllers
     public class UserController : Controller
     {
         private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
         private readonly IMapper _mapper;
+        private readonly IQueryProcessor _queryProcessor;
 
         public UserController(ICommandBus commandBus, IQueryProcessor queryProcessor, IMapper mapper)
         {
@@ -42,9 +42,9 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
         {
-            var users = await _queryProcessor.Process(new GetUsersQuery()
+            var users = await _queryProcessor.Process(new GetUsersQuery
             {
-                Ids = { id }
+                Ids = {id}
             });
             var user = users.FirstOrDefault();
 
@@ -62,15 +62,15 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet("{id}/requests")]
         public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(string id)
         {
-            var requests = await _queryProcessor.Process(new GetRequestsQuery()
+            var requests = await _queryProcessor.Process(new GetRequestsQuery
             {
-                UserIds = { id }
+                UserIds = {id}
             });
             var requestDtos = _mapper.Map<ICollection<RequestDto>>(requests);
 
             return Ok(requestDtos);
         }
-        
+
         //POST /users (Creates new users)
         [HttpPost]
         public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
@@ -79,16 +79,16 @@ namespace Unik.Marketing.Api.Web.Controllers
             var createdUser = await _commandBus.Process(new CreateUserCommand(user));
             var createdUserDto = _mapper.Map<UserDto>(createdUser);
 
-            return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
+            return CreatedAtAction("GetUser", new {createdUserDto.Id}, createdUserDto);
         }
-        
+
         //PUT /users/{id} (Updates an user ex- new email)
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(string id, [FromBody] UserDto userDto)
         {
-            var users = await _queryProcessor.Process(new GetUsersQuery()
+            var users = await _queryProcessor.Process(new GetUsersQuery
             {
-                Ids = { id }
+                Ids = {id}
             });
             var user = users.FirstOrDefault();
 
@@ -114,9 +114,9 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(string id)
         {
-            var users = await _queryProcessor.Process(new GetUsersQuery()
+            var users = await _queryProcessor.Process(new GetUsersQuery
             {
-                Ids = { id }
+                Ids = {id}
             });
             var user = users.FirstOrDefault();
 

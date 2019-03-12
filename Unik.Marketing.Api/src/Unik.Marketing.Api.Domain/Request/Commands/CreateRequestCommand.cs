@@ -1,6 +1,6 @@
 ﻿namespace Unik.Marketing.Api.Domain.Request.Commands
 {
-    public class CreateRequestCommand : ICommand<Domain.Request.Request>
+    public class CreateRequestCommand : ICommand<Request>
     {
         public CreateRequestCommand(string note, string userId)
         {

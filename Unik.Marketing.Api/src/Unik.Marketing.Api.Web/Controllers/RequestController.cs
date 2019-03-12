@@ -3,13 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using Unik.Marketing.Api.Data;
 using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Domain;
 using Unik.Marketing.Api.Domain.Request;
 using Unik.Marketing.Api.Domain.Request.Commands;
-using Unik.Marketing.Api.Web.Models;
 using Unik.Marketing.Api.Web.Models.Request;
 
 namespace Unik.Marketing.Api.Web.Controllers
@@ -18,8 +16,8 @@ namespace Unik.Marketing.Api.Web.Controllers
     public class RequestController : Controller
     {
         private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
         private readonly IMapper _mapper;
+        private readonly IQueryProcessor _queryProcessor;
 
         public RequestController(ICommandBus commandBus, IQueryProcessor queryProcessor, IMapper mapper)
         {
@@ -41,7 +39,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Request>> GetRequest(string id)
         {
-            var requests = await _queryProcessor.Process(new GetRequestsQuery()
+            var requests = await _queryProcessor.Process(new GetRequestsQuery
             {
                 Ids = {id}
             });
@@ -57,7 +55,7 @@ namespace Unik.Marketing.Api.Web.Controllers
 
             return CreatedAtAction(
                 "GetRequest",
-                new { id = createdDto.Id },
+                new {id = createdDto.Id},
                 createdDto
             );
         }

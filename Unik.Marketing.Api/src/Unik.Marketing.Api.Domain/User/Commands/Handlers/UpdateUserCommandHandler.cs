@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Unik.Marketing.Api.Domain.User.Commands.Handlers
 {
-    public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand, Domain.User.User>
+    public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand, User>
     {
-        public Task<Domain.User.User> Handle(UpdateUserCommand command)
+        public Task<User> Handle(UpdateUserCommand command)
         {
             throw new NotImplementedException();
         }

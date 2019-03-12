@@ -47,7 +47,7 @@ namespace Unik.Marketing.Api.Data.MongoDb.Request.Queries.Handlers
                     builder.In(nameof(RequestDocument.UserId), query.UserIds);
                 }
             }
-            
+
             var cursor = await collection.FindAsync(builder.ToBsonDocument());
 
             return _mapper.Map<ICollection<Data.Request.Request>>(await cursor.ToListAsync());

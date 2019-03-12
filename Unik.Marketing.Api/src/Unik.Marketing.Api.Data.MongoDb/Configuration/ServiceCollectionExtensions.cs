@@ -20,7 +20,9 @@ namespace Unik.Marketing.Api.Data.MongoDb.Configuration
                 return new MongoClient(options.ConnectionString);
             });
             services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
-            services.AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Data.Request.Request>>, GetRequestsQueryHandler>();
+            services
+                .AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Data.Request.Request>>,
+                    GetRequestsQueryHandler>();
             services.AddTransient<IQueryHandler<GetUsersQuery, ICollection<Data.User.User>>, GetUsersQueryHandler>();
 
             return services;

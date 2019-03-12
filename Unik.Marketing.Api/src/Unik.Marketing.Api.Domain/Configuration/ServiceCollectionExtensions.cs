@@ -17,11 +17,12 @@ namespace Unik.Marketing.Api.Domain.Configuration
 
         public static IServiceCollection AddCommandHandlers(this IServiceCollection services)
         {
-            services.AddTransient<ICommandHandler<CreateRequestCommand, Domain.Request.Request>, CreateRequestCommandHandler>();
-            services.AddTransient<ICommandHandler<UpdateNoteCommand, Domain.Request.Request>, UpdateNoteCommandHandler>();
+            services
+                .AddTransient<ICommandHandler<CreateRequestCommand, Request.Request>, CreateRequestCommandHandler>();
+            services.AddTransient<ICommandHandler<UpdateNoteCommand, Request.Request>, UpdateNoteCommandHandler>();
             services.AddTransient<ICommandHandler<DeleteRequestCommand>, DeleteRequestCommandHandler>();
-            services.AddTransient<ICommandHandler<CreateUserCommand, Domain.User.User>, CreateUserCommandHandler>();
-            services.AddTransient<ICommandHandler<UpdateUserCommand, Domain.User.User>, UpdateUserCommandHandler>();
+            services.AddTransient<ICommandHandler<CreateUserCommand, User.User>, CreateUserCommandHandler>();
+            services.AddTransient<ICommandHandler<UpdateUserCommand, User.User>, UpdateUserCommandHandler>();
             services.AddTransient<ICommandHandler<DeleteUserCommand>, DeleteUserCommandHandler>();
 
             return services;
