@@ -63,24 +63,8 @@ namespace Unik.Marketing.Api.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Request>> Update(string id, [FromBody] RequestDto requestDto)
+        public async Task<ActionResult<Request>> Update(string id, [FromBody] UpdateRequestDto requestDto)
         {
-            var requests = await _queryProcessor.Process(new GetRequestsQuery()
-            {
-                Ids = { id }
-            });
-            var request = requests.FirstOrDefault();
-
-            if (request == null)
-            {
-                return NotFound();
-            }
-
-            if (id != requestDto.Id)
-            {
-                return BadRequest();
-            }
-            
             var updatedRequest = await _commandBus.Process(new UpdateNoteCommand(id, requestDto.Note));
             var updatedRequestDto = _mapper.Map<RequestDto>(updatedRequest);
 
