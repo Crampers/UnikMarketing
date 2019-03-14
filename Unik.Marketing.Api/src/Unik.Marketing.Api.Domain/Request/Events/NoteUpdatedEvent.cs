@@ -2,9 +2,9 @@
 
 namespace Unik.Marketing.Api.Domain.Request.Events
 {
-    public class UpdateNoteEvent : IEvent
+    public class NoteUpdatedEvent : IEvent
     {
-        public UpdateNoteEvent(string note)
+        public NoteUpdatedEvent(string note)
         {
             Note = note;
         }

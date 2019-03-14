@@ -24,7 +24,7 @@ namespace Unik.Marketing.Api.Domain.Request
 
         public void UpdateNote(string note)
         {
-            ApplyChange(new UpdateNoteEvent(note));
+            ApplyChange(new NoteUpdatedEvent(note));
         }
 
         private void Apply(RequestCreatedEvent @event)
@@ -34,7 +34,7 @@ namespace Unik.Marketing.Api.Domain.Request
             UserId = @event.UserId;
         }
 
-        private void Apply(UpdateNoteEvent @event)
+        private void Apply(NoteUpdatedEvent @event)
         {
             Note = @event.Note;
         }
