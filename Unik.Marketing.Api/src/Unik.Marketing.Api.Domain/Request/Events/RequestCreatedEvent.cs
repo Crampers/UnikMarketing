@@ -1,5 +1,5 @@
 ﻿using System;
-using Unik.Marketing.Api.Domain.EventStore;
+using Unik.Marketing.Api.Messaging;
 
 namespace Unik.Marketing.Api.Domain.Request.Events
 {

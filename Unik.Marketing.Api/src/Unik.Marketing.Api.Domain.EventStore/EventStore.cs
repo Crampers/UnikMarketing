@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Unik.Marketing.Api.Messaging;
 
 namespace Unik.Marketing.Api.Domain.EventStore
 {

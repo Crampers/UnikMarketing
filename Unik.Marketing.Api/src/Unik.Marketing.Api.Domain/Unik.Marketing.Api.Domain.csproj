@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Unik.Marketing.Api.Caching\Unik.Marketing.Api.Caching.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Domain.EventStore\Unik.Marketing.Api.Domain.EventStore.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Messaging\Unik.Marketing.Api.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

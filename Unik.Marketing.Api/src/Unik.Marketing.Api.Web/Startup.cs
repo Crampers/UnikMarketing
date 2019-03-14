@@ -11,6 +11,7 @@ using Unik.Marketing.Api.Data.MongoDb.Configuration;
 using Unik.Marketing.Api.Domain.Configuration;
 using Unik.Marketing.Api.Domain.EventStore.Configuration;
 using Unik.Marketing.Api.Domain.EventStore.InMemory.Configuration;
+using Unik.Marketing.Api.Messaging.Configuration;
 
 namespace Unik.Marketing.Api.Web
 {
@@ -38,6 +39,8 @@ namespace Unik.Marketing.Api.Web
 
             services.AddInMemoryCache();
             services.Configure<CacheOptions>(_configuration.GetSection("Caching"));
+
+            services.AddEventBus();
 
             services.AddCommandBus();
             services.AddCommandHandlers();

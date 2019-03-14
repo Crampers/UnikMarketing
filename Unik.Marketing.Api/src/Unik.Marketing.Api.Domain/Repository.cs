@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Unik.Marketing.Api.Caching;
 using Unik.Marketing.Api.Domain.EventStore;
+using Unik.Marketing.Api.Messaging;
 
 namespace Unik.Marketing.Api.Domain
 {
@@ -10,16 +11,26 @@ namespace Unik.Marketing.Api.Domain
     {
         private readonly IEventStore _eventStore;
         private readonly ICache<Guid, TAggregate> _cache;
+        private readonly IEventBus _eventBus;
 
-        public Repository(IEventStore eventStore, ICache<Guid, TAggregate> cache)
+        public Repository(IEventStore eventStore, ICache<Guid, TAggregate> cache, IEventBus eventBus)
         {
             _eventStore = eventStore;
             _cache = cache;
+            _eventBus = eventBus;
         }
 
-        public Task Save(TAggregate aggregate)
+        public async Task Save(TAggregate aggregate)
         {
-            return _eventStore.Save(aggregate.Id, aggregate.FlushUncommittedChanges());
+            var events = aggregate.FlushUncommittedChanges();
+
+            await _eventStore.Save(aggregate.Id, events);
+
+            foreach (var @event in events)
+            {
+                // TODO: Clarify whether published events should be ordered
+                await _eventBus.Publish(@event);
+            }
         }
 
         public Task<TAggregate> Get(Guid id)
