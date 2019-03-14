@@ -34,6 +34,7 @@ namespace Unik.Marketing.Api.Data.MongoDb.Configuration
         public static IServiceCollection AddMongoDbViewHandlers(this IServiceCollection services)
         {
             services.AddTransient<IEventHandler<RequestCreatedEvent>, RequestCreatedViewHandler>();
+            services.AddTransient<IEventHandler<NoteUpdatedEvent>, NoteUpdatedViewHandler>();
 
             return services;
         }
