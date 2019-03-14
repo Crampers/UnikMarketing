@@ -47,6 +47,7 @@ namespace Unik.Marketing.Api.Web
 
             services.AddQueryBus();
             services.AddMongoDbQueryHandlers();
+            services.AddMongoDbViewHandlers();
             services.Configure<MongoDbOptions>(_configuration.GetSection("MongoDb"));
 
             services.AddEventStore();

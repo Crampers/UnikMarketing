@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Messaging\Unik.Marketing.Api.Messaging.csproj" />
   </ItemGroup>
 
 </Project>
