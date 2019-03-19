@@ -43,15 +43,15 @@ namespace Unik.Marketing.Integration.Tools
             return new SqlCommand(RentalSql, sqlConnection);
         }
 
-        private static ICollection<RentalObjectDto> GetAll(SqlConnection sqlConnection)
+        private static ICollection<MarketingCaseDto> GetAll(SqlConnection sqlConnection)
         {
-            List<RentalObjectDto> result = new List<RentalObjectDto>();
+            List<MarketingCaseDto> result = new List<MarketingCaseDto>();
             sqlConnection.Open();
             using (SqlDataReader dataReader = CreateRentalCommand(sqlConnection).ExecuteReader())
             {
                     foreach (IDataRecord dataRecord in dataReader)
                     {
-                        result.Add(new RentalObjectDto
+                        result.Add(new MarketingCaseDto
                         {
                             RentalObjectId = (int) dataRecord["UdlejningsSagId"],
                             Titel = (string) dataRecord["Titel"],

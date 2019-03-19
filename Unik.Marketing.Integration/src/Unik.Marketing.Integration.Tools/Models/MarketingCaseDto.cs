@@ -1,6 +1,6 @@
 ﻿namespace Unik.Marketing.Integration.Tools.Models
 {
-    public class RentalObjectDto
+    public class MarketingCaseDto
     {
         public int RentalObjectId { get; set; }
         public string Titel { get; set; }
