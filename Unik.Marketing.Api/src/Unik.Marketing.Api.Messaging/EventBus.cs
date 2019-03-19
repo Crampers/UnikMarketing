@@ -2,31 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Unik.Marketing.Api.Messaging
 {
     public class EventBus : IEventBus
     {
-        private readonly Dictionary<Type, List<IEventHandler<IEvent>>> _subscribers = new Dictionary<Type, List<IEventHandler<IEvent>>>();
+        private readonly IServiceProvider _serviceProvider;
 
-        public void Subscribe(Type eventType, IEventHandler<IEvent> eventHandler)
+        public EventBus(IServiceProvider serviceProvider)
         {
-            if (!_subscribers.ContainsKey(eventType))
-            {
-                _subscribers.Add(eventType, new List<IEventHandler<IEvent>>());
-            }
-
-            _subscribers[eventType].Add(eventHandler);
+            _serviceProvider = serviceProvider;
         }
 
         public Task Publish(IEvent @event)
         {
-            if (_subscribers.TryGetValue(@event.GetType(), out var subscribers))
-            {
-                return Task.WhenAll(subscribers.Select(x => x.Handle(@event)));
-            }
+            var type = typeof(IEventHandler<>).MakeGenericType(@event.GetType());
 
-            return Task.FromResult(0);
+            IEnumerable<dynamic> handlers = _serviceProvider.GetServices(type);
+
+            return Task.WhenAll(handlers.Select(x => (Task)x.Handle((dynamic)@event)));
         }
     }
 }

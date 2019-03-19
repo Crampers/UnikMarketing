@@ -17,7 +17,7 @@ namespace Unik.Marketing.Api.Data.MongoDb.Request.Events
         public Task Handle(RequestCreatedEvent @event)
         {
             var collection = _database.GetCollection<RequestDocument>(Collections.Requests);
-
+            
             return collection.InsertOneAsync(new RequestDocument()
             {
                 Id = @event.Id.ToString(),

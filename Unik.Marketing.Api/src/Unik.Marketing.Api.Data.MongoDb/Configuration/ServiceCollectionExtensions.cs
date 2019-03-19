@@ -16,13 +16,13 @@ namespace Unik.Marketing.Api.Data.MongoDb.Configuration
     {
         public static IServiceCollection AddMongoDbQueryHandlers(this IServiceCollection services)
         {
-            services.AddScoped<IMongoClient>(provider =>
+            services.AddSingleton<IMongoClient>(provider =>
             {
                 var options = provider.GetRequiredService<IOptions<MongoDbOptions>>().Value;
 
                 return new MongoClient(options.ConnectionString);
             });
-            services.AddScoped(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
+            services.AddSingleton(provider => provider.GetService<IMongoClient>().GetDatabase("unik_marketing"));
             services
                 .AddTransient<IQueryHandler<GetRequestsQuery, ICollection<Data.Request.Request>>,
                     GetRequestsQueryHandler>();
