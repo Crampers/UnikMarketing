@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Unik.Marketing.Api.Data.MongoDb.Documents;
+using Unik.Marketing.Api.Data.MongoDb.Request;
 using Unik.Marketing.Api.Data.User.Queries;
 
 namespace Unik.Marketing.Api.Data.MongoDb.User.Queries.Handlers
 {
-    public class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, ICollection<Domain.User>>
+    public class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, ICollection<Data.User.User>>
     {
         private readonly IMongoDatabase _database;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Unik.Marketing.Api.Data.MongoDb.User.Queries.Handlers
             _mapper = mapper;
         }
 
-        public async Task<ICollection<Domain.User>> Handle(GetUsersQuery query)
+        public async Task<ICollection<Data.User.User>> Handle(GetUsersQuery query)
         {
             var collection = _database.GetCollection<UserDocument>(Collections.Users);
             var builder = Builders<RequestDocument>.Filter;
@@ -39,7 +39,7 @@ namespace Unik.Marketing.Api.Data.MongoDb.User.Queries.Handlers
 
             var cursor = await collection.FindAsync(builder.ToBsonDocument());
 
-            return _mapper.Map<ICollection<Domain.User>>(await cursor.ToListAsync());
+            return _mapper.Map<ICollection<Data.User.User>>(await cursor.ToListAsync());
         }
     }
 }

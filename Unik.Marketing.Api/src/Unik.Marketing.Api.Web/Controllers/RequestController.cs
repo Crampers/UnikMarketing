@@ -1,22 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Unik.Marketing.Api.Business;
+using Unik.Marketing.Api.Data;
+using Unik.Marketing.Api.Data.Request.Queries;
 using Unik.Marketing.Api.Domain;
-using Unik.Marketing.Api.Web.Models;
+using Unik.Marketing.Api.Domain.Request;
+using Unik.Marketing.Api.Domain.Request.Commands;
+using Unik.Marketing.Api.Web.Models.Request;
 
 namespace Unik.Marketing.Api.Web.Controllers
 {
     [Route("requests")]
     public class RequestController : Controller
     {
+        private readonly ICommandBus _commandBus;
         private readonly IMapper _mapper;
-        private readonly IRequestService _requestService;
+        private readonly IQueryProcessor _queryProcessor;
 
-        public RequestController(IRequestService requestService, IMapper mapper)
+        public RequestController(ICommandBus commandBus, IQueryProcessor queryProcessor, IMapper mapper)
         {
-            _requestService = requestService;
+            _commandBus = commandBus;
+            _queryProcessor = queryProcessor;
             _mapper = mapper;
         }
 
@@ -24,46 +30,41 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<ICollection<Request>>> GetRequests()
         {
-            return Ok(await _requestService.GetAll());
+            var requests = await _queryProcessor.Process(new GetRequestsQuery());
+
+            return Ok(requests);
         }
 
         //GET /requests/{id} (Get requests with id)
         [HttpGet("{id}")]
         public async Task<ActionResult<Request>> GetRequest(string id)
         {
-            return Ok(await _requestService.Get(id));
+            var requests = await _queryProcessor.Process(new GetRequestsQuery
+            {
+                Ids = {id}
+            });
+
+            return Ok(requests.FirstOrDefault());
         }
 
         [HttpPost]
-        public async Task<ActionResult<Request>> Create([FromBody] RequestDto requestDto)
+        public async Task<ActionResult<Request>> Create([FromBody] CreateRequestDto dto)
         {
-            var request = _mapper.Map<Request>(requestDto);
-            var createdDto = _mapper.Map<RequestDto>(await _requestService.Create(request));
+            var created = await _commandBus.Process(new CreateRequestCommand(dto.Note, dto.UserId));
+            var createdDto = _mapper.Map<RequestDto>(created);
 
             return CreatedAtAction(
                 "GetRequest",
-                new { id = createdDto.Id },
+                new {id = createdDto.Id},
                 createdDto
             );
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Request>> Update(string id, [FromBody] RequestDto requestDto)
+        public async Task<ActionResult<Request>> Update(string id, [FromBody] UpdateRequestDto requestDto)
         {
-            var request = await _requestService.Get(id);
-
-            if (request == null)
-            {
-                return NotFound();
-            }
-
-            if (id != requestDto.Id)
-            {
-                return BadRequest();
-            }
-
-            var updatedRequest = _mapper.Map<Request>(requestDto);
-            var updatedRequestDto = _mapper.Map<RequestDto>(await _requestService.Update(updatedRequest));
+            var updatedRequest = await _commandBus.Process(new UpdateNoteCommand(id, requestDto.Note));
+            var updatedRequestDto = _mapper.Map<RequestDto>(updatedRequest);
 
             return Ok(updatedRequestDto);
         }
@@ -71,19 +72,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Request>> Update(string id)
         {
-            var request = await _requestService.Get(id);
-
-            if (request == null)
-            {
-                return NotFound();
-            }
-
-            if (id != request.Id)
-            {
-                return BadRequest();
-            }
-
-            await _requestService.Delete(id);
+            await _commandBus.Process(new DeleteRequestCommand(id));
 
             return NoContent();
         }

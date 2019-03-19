@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Unik.Marketing.Api.Data.MongoDb.Documents;
-using Unik.Marketing.Api.Domain;
+using Unik.Marketing.Api.Data.MongoDb.Request;
+using Unik.Marketing.Api.Data.MongoDb.User;
+using Unik.Marketing.Api.Data.User;
 
 namespace Unik.Marketing.Api.Data.MongoDb.Mapping
 {
@@ -8,8 +9,8 @@ namespace Unik.Marketing.Api.Data.MongoDb.Mapping
     {
         public DomainToDocumentProfile()
         {
-            CreateMap<Domain.Request, RequestDocument>();
-            CreateMap<Domain.User, UserDocument>();
+            CreateMap<Data.Request.Request, RequestDocument>();
+            CreateMap<Data.User.User, UserDocument>();
             CreateMap<Criteria, CriteriaDocument>()
                 .ForMember(
                     member => member.FloorFrom,

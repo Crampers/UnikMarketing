@@ -1,32 +1,38 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Unik.Marketing.Api.Business;
+using Unik.Marketing.Api.Data;
+using Unik.Marketing.Api.Data.Request.Queries;
+using Unik.Marketing.Api.Data.User.Queries;
 using Unik.Marketing.Api.Domain;
+using Unik.Marketing.Api.Domain.User;
+using Unik.Marketing.Api.Domain.User.Commands;
 using Unik.Marketing.Api.Web.Models;
+using Unik.Marketing.Api.Web.Models.Request;
 
 namespace Unik.Marketing.Api.Web.Controllers
 {
     [Route("users")]
     public class UserController : Controller
     {
+        private readonly ICommandBus _commandBus;
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
-        private readonly IRequestService _requestService;
+        private readonly IQueryProcessor _queryProcessor;
 
-        public UserController(IMapper mapper, IUserService userService, IRequestService requestService)
+        public UserController(ICommandBus commandBus, IQueryProcessor queryProcessor, IMapper mapper)
         {
+            _commandBus = commandBus;
+            _queryProcessor = queryProcessor;
             _mapper = mapper;
-            _userService = userService;
-            _requestService = requestService;
         }
 
         //GET /users (Gets all users)
         [HttpGet]
         public async Task<ActionResult<ICollection<UserDto>>> GetUsers()
         {
-            var users = await _userService.GetAll();
+            var users = await _queryProcessor.Process(new GetUsersQuery());
             var usersDtos = _mapper.Map<ICollection<UserDto>>(users);
 
             return Ok(usersDtos);
@@ -36,7 +42,11 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
         {
-            var user = await _userService.Get(id);
+            var users = await _queryProcessor.Process(new GetUsersQuery
+            {
+                Ids = {id}
+            });
+            var user = users.FirstOrDefault();
 
             if (user == null)
             {
@@ -52,27 +62,35 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpGet("{id}/requests")]
         public async Task<ActionResult<ICollection<RequestDto>>> GetUserRequests(string id)
         {
-            var requests = await _requestService.GetByUser(id);
+            var requests = await _queryProcessor.Process(new GetRequestsQuery
+            {
+                UserIds = {id}
+            });
             var requestDtos = _mapper.Map<ICollection<RequestDto>>(requests);
 
             return Ok(requestDtos);
         }
-        
+
         //POST /users (Creates new users)
         [HttpPost]
         public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            var createdUserDto = _mapper.Map<UserDto>(await _userService.Create(user));
+            var createdUser = await _commandBus.Process(new CreateUserCommand(user));
+            var createdUserDto = _mapper.Map<UserDto>(createdUser);
 
-            return CreatedAtAction("GetUser", new { createdUserDto.Id }, createdUserDto);
+            return CreatedAtAction("GetUser", new {createdUserDto.Id}, createdUserDto);
         }
-        
+
         //PUT /users/{id} (Updates an user ex- new email)
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(string id, [FromBody] UserDto userDto)
         {
-            var user = _userService.Get(id);
+            var users = await _queryProcessor.Process(new GetUsersQuery
+            {
+                Ids = {id}
+            });
+            var user = users.FirstOrDefault();
 
             if (user == null)
             {
@@ -84,8 +102,9 @@ namespace Unik.Marketing.Api.Web.Controllers
                 return BadRequest();
             }
 
-            var updatedUser = _mapper.Map<User>(userDto);
-            var updatedUserDto = _mapper.Map<UserDto>(await _userService.Update(updatedUser));
+            var updatingUser = _mapper.Map<User>(userDto);
+            var updatedUser = _commandBus.Process(new UpdateUserCommand(updatingUser));
+            var updatedUserDto = _mapper.Map<UserDto>(updatedUser);
 
             return Ok(updatedUserDto);
         }
@@ -95,7 +114,11 @@ namespace Unik.Marketing.Api.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(string id)
         {
-            var user = await _userService.Get(id);
+            var users = await _queryProcessor.Process(new GetUsersQuery
+            {
+                Ids = {id}
+            });
+            var user = users.FirstOrDefault();
 
             if (user == null)
             {
@@ -106,8 +129,8 @@ namespace Unik.Marketing.Api.Web.Controllers
             {
                 return BadRequest();
             }
-            
-            await _userService.Delete(id);
+
+            await _commandBus.Process(new DeleteUserCommand(id));
 
             return NoContent();
         }

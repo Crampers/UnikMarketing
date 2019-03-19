@@ -6,12 +6,15 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Messaging\Unik.Marketing.Api.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

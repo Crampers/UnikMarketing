@@ -2,7 +2,7 @@
 
 namespace Unik.Marketing.Api.Data.User.Queries
 {
-    public class GetUsersQuery : IQuery<ICollection<Domain.User>>
+    public class GetUsersQuery : IQuery<ICollection<User>>
     {
         public ICollection<string> Ids { get; set; } = new List<string>();
     }

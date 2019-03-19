@@ -29,9 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Unik.Marketing.Api.Business\Unik.Marketing.Api.Business.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Caching.InMemory\Unik.Marketing.Api.Caching.InMemory.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Caching\Unik.Marketing.Api.Caching.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Data.MongoDb\Unik.Marketing.Api.Data.MongoDb.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Domain.EventStore.InMemory\Unik.Marketing.Api.Domain.EventStore.InMemory.csproj" />
+    <ProjectReference Include="..\Unik.Marketing.Api.Domain.EventStore\Unik.Marketing.Api.Domain.EventStore.csproj" />
     <ProjectReference Include="..\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj" />
   </ItemGroup>
 

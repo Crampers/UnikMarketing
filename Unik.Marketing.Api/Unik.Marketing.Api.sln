@@ -5,13 +5,21 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Web", "src\Unik.Marketing.Api.Web\Unik.Marketing.Api.Web.csproj", "{ED219154-B953-4A82-976A-2119C5F85569}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain", "src\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj", "{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data.MongoDb", "src\Unik.Marketing.Api.Data.MongoDb\Unik.Marketing.Api.Data.MongoDb.csproj", "{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Data", "src\Unik.Marketing.Api.Data\Unik.Marketing.Api.Data.csproj", "{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Business", "src\Unik.Marketing.Api.Business\Unik.Marketing.Api.Business.csproj", "{0C2630E2-CA4A-4100-B961-B543326734E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain.EventStore", "src\Unik.Marketing.Api.Domain.EventStore\Unik.Marketing.Api.Domain.EventStore.csproj", "{D7ED14C6-AD99-4F49-93FF-87B138852E7B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain.EventStore.InMemory", "src\Unik.Marketing.Api.Domain.EventStore.InMemory\Unik.Marketing.Api.Domain.EventStore.InMemory.csproj", "{39EBADE0-76BA-4B81-973D-00588EE746F7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Domain", "src\Unik.Marketing.Api.Domain\Unik.Marketing.Api.Domain.csproj", "{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Caching", "src\Unik.Marketing.Api.Caching\Unik.Marketing.Api.Caching.csproj", "{3543AD2A-A026-4B0D-B806-78C7BB902194}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unik.Marketing.Api.Caching.InMemory", "src\Unik.Marketing.Api.Caching.InMemory\Unik.Marketing.Api.Caching.InMemory.csproj", "{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unik.Marketing.Api.Messaging", "src\Unik.Marketing.Api.Messaging\Unik.Marketing.Api.Messaging.csproj", "{5A6A7616-AF06-4065-B476-02E2A51FD057}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +31,6 @@ Global
 		{ED219154-B953-4A82-976A-2119C5F85569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED219154-B953-4A82-976A-2119C5F85569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED219154-B953-4A82-976A-2119C5F85569}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DAE0337-EF8E-47EE-BE29-2718DFC93FCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D24BE9D6-30E8-4AF5-A490-BCDF9C73F218}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +39,30 @@ Global
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08FEFAAD-4E3B-44D2-9328-B010B8C707AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C2630E2-CA4A-4100-B961-B543326734E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7ED14C6-AD99-4F49-93FF-87B138852E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EBADE0-76BA-4B81-973D-00588EE746F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA300CC1-EDCB-493F-A26A-29EDD0AD5AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3543AD2A-A026-4B0D-B806-78C7BB902194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3543AD2A-A026-4B0D-B806-78C7BB902194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3543AD2A-A026-4B0D-B806-78C7BB902194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3543AD2A-A026-4B0D-B806-78C7BB902194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AB18C5-7D53-4E76-BE6D-F6C22BD7AE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6A7616-AF06-4065-B476-02E2A51FD057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6A7616-AF06-4065-B476-02E2A51FD057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6A7616-AF06-4065-B476-02E2A51FD057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6A7616-AF06-4065-B476-02E2A51FD057}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
