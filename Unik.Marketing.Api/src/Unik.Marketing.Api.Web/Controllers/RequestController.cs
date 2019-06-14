@@ -28,27 +28,29 @@ namespace Unik.Marketing.Api.Web.Controllers
 
         //GET /requests (Gets all requests)
         [HttpGet]
-        public async Task<ActionResult<ICollection<Request>>> GetRequests()
+        public async Task<ActionResult<ICollection<RequestDto>>> GetRequests()
         {
             var requests = await _queryProcessor.Process(new GetRequestsQuery());
+            var requestDtos = _mapper.Map<ICollection<RequestDto>>(requests);
 
-            return Ok(requests);
+            return Ok(requestDtos);
         }
 
         //GET /requests/{id} (Get requests with id)
         [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> GetRequest(string id)
+        public async Task<ActionResult<RequestDto>> GetRequest(string id)
         {
             var requests = await _queryProcessor.Process(new GetRequestsQuery
             {
                 Ids = {id}
             });
+            var requestDto = _mapper.Map<RequestDto>(requests.FirstOrDefault());
 
-            return Ok(requests.FirstOrDefault());
+            return Ok(requestDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Request>> Create([FromBody] CreateRequestDto dto)
+        public async Task<ActionResult<RequestDto>> Create([FromBody] CreateRequestDto dto)
         {
             var created = await _commandBus.Process(new CreateRequestCommand(dto.Note, dto.UserId));
             var createdDto = _mapper.Map<RequestDto>(created);
@@ -61,7 +63,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Request>> Update(string id, [FromBody] UpdateRequestDto requestDto)
+        public async Task<ActionResult<RequestDto>> Update(string id, [FromBody] UpdateRequestDto requestDto)
         {
             var updatedRequest = await _commandBus.Process(new UpdateNoteCommand(id, requestDto.Note));
             var updatedRequestDto = _mapper.Map<RequestDto>(updatedRequest);
@@ -70,7 +72,7 @@ namespace Unik.Marketing.Api.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Request>> Update(string id)
+        public async Task<ActionResult<RequestDto>> Update(string id)
         {
             await _commandBus.Process(new DeleteRequestCommand(id));
 
