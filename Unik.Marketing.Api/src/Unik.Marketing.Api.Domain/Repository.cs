@@ -25,6 +25,7 @@ namespace Unik.Marketing.Api.Domain
             var events = aggregate.FlushUncommittedChanges();
 
             await _eventStore.Save(aggregate.Id, events);
+            await _cache.Set(aggregate.Id, aggregate);
 
             foreach (var @event in events)
             {
